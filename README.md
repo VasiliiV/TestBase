@@ -1,5 +1,5 @@
 # progaForTags
 
 Для старта
-*cd my-app
-*npm start
+#cd my-app
+#npm start
