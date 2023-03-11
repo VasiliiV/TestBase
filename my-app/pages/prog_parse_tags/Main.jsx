@@ -4,10 +4,10 @@ import {useState, useEffect} from 'react';
 function Main() {
             function handleParseButtonClick() {
               const data = {
-                yandex: yandexInputValue,
-                google: googleInputValue
+                yandex: isYandexChecked ? yandexInputValue : '',
+                google: isGoogleChecked ? googleInputValue : ''
               };
-              fetch('/api/parse', {
+              fetch('/api/click', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
@@ -23,6 +23,7 @@ function Main() {
                   console.error(error);
                 });
             }
+  
   
 
   //disable is input with click check-box
