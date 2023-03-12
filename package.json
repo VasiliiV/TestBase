@@ -9,6 +9,9 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/chownr": "^1.0.0"
+    "@types/chownr": "^1.0.0",
+    "@types/node": "^18.15.0",
+    "@types/react": "^18.0.28",
+    "typescript": "^4.9.5"
   }
 }
