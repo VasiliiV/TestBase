@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next build",
     "lint": "next lint",
-    "build-and-start": "npm run build && npm run start"
+    "build-and-start": "next build && next build"
   },
   "dependencies": {
     "@types/node": "18.15.0",
