@@ -5,8 +5,8 @@ import {useState, useEffect} from 'react';
 function Main() {
             function handleParseButtonClick() {
               const data = {
-                yandex: isYandexChecked ? yandexInputValue : '',
-                google: isGoogleChecked ? googleInputValue : ''
+                yandex: isNameChecked ? nameInputValue : '',
+                google: isAgeChecked ? ageInputValue : ''
               };
               fetch('/api/click', {
                 method: 'POST',
@@ -28,10 +28,10 @@ function Main() {
   
 
   //disable is input with click check-box
-            const [isYandexChecked, setIsYandexChecked] = useState(false);
-            const [isGoogleChecked, setIsGoogleChecked] = useState(false);
-            const [yandexInputValue, setYandexInputValue] = useState('');
-            const [googleInputValue, setGoogleInputValue] = useState('');
+            const [isNameChecked, setIsYandexChecked] = useState(false);
+            const [isAgeChecked, setIsGoogleChecked] = useState(false);
+            const [nameInputValue, setYandexInputValue] = useState('');
+            const [ageInputValue, setGoogleInputValue] = useState('');
 
             function handleYandexCheckboxChange(event) {
                 setIsYandexChecked(event.target.checked);
@@ -42,49 +42,49 @@ function Main() {
             }
 
         useEffect(() => {
-        const yandexInput = document.querySelector('#Yandex input[type="text"]');
-        const googleInput = document.querySelector('#google input[type="text"]');
+        const nameInput = document.querySelector('#name input[type="text"]');
+        const googleInput = document.querySelector('#age input[type="text"]');
 
-        if (isYandexChecked) {
-            yandexInput.disabled = false;
+        if (isNameChecked) {
+            nameInput.disabled = false;
           } else {
-            yandexInput.disabled = true;
+            nameInput.disabled = true;
           }
           
-          if (isGoogleChecked) {
+          if (isAgeChecked) {
             googleInput.disabled = false;
           } else {
             googleInput.disabled = true;
           }
 
-        }, [isYandexChecked, isGoogleChecked]);
+        }, [isNameChecked, isAgeChecked]);
     return (
         <div id='main'>
             <div id="header">
-                <h1 className="headerMain">Парсим тэги</h1>
+                <h1 className="headerMain">Test base</h1>
             </div>
             <div id="body">
-                <div id="table parce from yandex and google">
+                <div id="">
                     <div id='header_table'>
-                        <h3>Выбери источник</h3>
+                        <h3>Блок. Добавляй значения и ломай</h3>
                     </div>
-                    <div id='search_block'>
-                        <div id="Yandex">
-                            <h5>WordStat from Yandex:</h5>
-                            <div className='inputYandex'>
-                                <input type="text" disabled={!isYandexChecked} value={yandexInputValue} onChange={(event) => setYandexInputValue(event.target.value)} />
+                    <div id='name_block'>
+                        <div id="name">
+                            <h5>Внеси имя:</h5>
+                            <div className='inputName'>
+                                <input type="text" disabled={!isNameChecked} value={nameInputValue} onChange={(event) => setYandexInputValue(event.target.value)} />
                                 <input type="checkbox" name="" id="" onChange={handleYandexCheckboxChange} />
                             </div>
                         </div>
-                        <div id="google">
-                            <h5>Trends.google from Google:</h5>
-                            <div className='inputGoogle'>
-                                <input type="text" disabled={!isGoogleChecked} value={googleInputValue} onChange={(event) => setGoogleInputValue(event.target.value)} />
+                        <div id="age">
+                            <h5>Внеси возраст:</h5>
+                            <div className='inputAge'>
+                                <input type="text" disabled={!isAgeChecked} value={ageInputValue} onChange={(event) => setGoogleInputValue(event.target.value)} />
                                 <input type="checkbox" name="" id="" onChange={handleGoogleCheckboxChange} />
                             </div>
                         </div>
                         <div id="search">
-                            <button onClick={handleParseButtonClick}>Click</button>
+                            <button onClick={handleParseButtonClick}>Сохранить</button>
                         </div>
                     </div>
                 </div>

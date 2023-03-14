@@ -10,7 +10,7 @@ body {
 .headerMain {
     margin-left: 15px;
 }
-#search_block {
+#name_block {
     margin-left: 15px;
     height: 150px;
     width: 300px;
@@ -20,11 +20,11 @@ body {
     justify-content: center;
 }
 
-.inputYandex {
+.inputName {
     display: flex;
     align-items: center;
 }
-.inputGoogle {
+.inputAge {
     display: flex;
     align-items: center;
 }
