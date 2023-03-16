@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 export default function click(req, res) {
     if (req.method === 'POST') {
       const { yandex, google } = req.body;
@@ -10,4 +8,3 @@ export default function click(req, res) {
       res.status(404).json({ message: 'Not found' });
     }
   }
-  
