@@ -1,4 +1,4 @@
-# progaForTags
+# progaBaseTest
 
 Для старта:
 <br/>1 шаг. cd my-app
@@ -7,3 +7,6 @@
 удалить node_modules и выполнить npm install
 и повторить npm run dev.
 Возможно нужно будет установить next.
+
+<br/>Данный проект реализован на next.js, 
+<br/>также есть бэк, которые работает вместе с базой данных на sqlite.
