@@ -1,0 +1,22 @@
+.Header-Right {
+    display: flex;
+    align-items: center;
+    padding-top: 21px
+}
+.Header-User {
+}
+.user-account {
+    display: inline-block;
+    cursor: pointer;
+}
+.user-account_name {
+    display: inline-block;
+    cursor: pointer;
+    max-width: 152px;
+}
+
+.Button_view_image {
+    cursor: pointer;
+    display: flex;
+    padding: 6px;
+}

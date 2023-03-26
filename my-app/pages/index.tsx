@@ -5,6 +5,7 @@ import Main from './prog_parse_tags/Main'
 import App from './_app'
 import React from 'react'
 import { ReactDOM } from 'react'
+import BlogForImage from './prog_parse_tags/blog_for_image/blog_for_image'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,6 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Main/>
+      <BlogForImage/>
     </>
   )
 }
