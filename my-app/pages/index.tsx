@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import Main from './pages/prog_parse_tags/Main'
-import App from './pages/_app'
+import Main from './prog_parse_tags/Main'
+import App from './_app'
 import React from 'react'
 import { ReactDOM } from 'react'
 
