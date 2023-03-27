@@ -1,5 +1,5 @@
 import React from "react";
-import logoApp from "./cool-pictures-2018-32.jpeg"
+
 
 const SectionImage = () => {
     return (
@@ -8,9 +8,9 @@ const SectionImage = () => {
                 <div className="user-account" href="">
                     <span className="user-account_name"></span>
                     <div className="user-account_icon">
-                        <img src={logoApp} alt="" className="blog_for_image__logo"/>
+                        <img src="/multfilm_gomer.png" alt="" width={120}/>
                     </div>
-                    <button className="Button_view_image" type="button">Загрузить</button>
+                    <button className="Button_view_button" type="button">Загрузить</button>
                 </div>
             </div>
         </div>
