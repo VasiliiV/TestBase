@@ -10,7 +10,7 @@ return (
 <div className="headerRight">
     <div className="headerUser">
         <div className="user-account" href="">
-            <span className="user-account_name">{userName}</span>
+            <span className="user-account_name">{userName}</span> //тут хочу оторазить имя из бд
             <div className="user-account_icon">
                 <img src="/multfilm_gomer.png" alt="" width={120} />
             </div>
