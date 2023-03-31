@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 
 
 function Main() {
+
             function handleParseButtonClick() {
               const data = {
                 name: isNameChecked ? nameInputValue : '',

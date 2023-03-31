@@ -11,13 +11,13 @@ export default async function click(req, res) {
       });
       await db.run(`CREATE TABLE IF NOT EXISTS tags (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age TEXT)`);
       await db.run(`INSERT INTO tags (name, age) VALUES (?, ?)`, name, age);
+        const lastRow = await db.get("SELECT name FROM tags ORDER BY id DESC LIMIT 1");
       await db.close();
-      res.status(200).json({ 
-        name: name,
-        age: age 
+        res.status(200).json({
+        name: lastRow.name,
+        age: age,
       });
     } else {
-      res.status(404).json({ message: 'Not found' });
-    }
-    console.log(data)
-  }
+      res.status(404).json({ message: "Not found" });
+      }
+}
