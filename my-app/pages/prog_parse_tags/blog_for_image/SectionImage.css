@@ -4,6 +4,7 @@
     padding-top: 21px
 }
 .headerUser {
+    margin: 10px;
 }
 .user-account {
     display: inline-block;
@@ -13,12 +14,16 @@
     display: inline-block;
     cursor: pointer;
     max-width: 152px;
+    width: 150px;
+    height: 30px;
+    border-bottom: 2px solid maroon;
 }
 .user-account_icon {
-    
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .Button_view_button {
     cursor: pointer;
     display: flex;
     padding: 6px;
+    margin-top: 10px;
 }
