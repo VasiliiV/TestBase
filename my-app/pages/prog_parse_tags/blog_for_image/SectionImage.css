@@ -8,22 +8,24 @@
 }
 .user-account {
     display: inline-block;
-    cursor: pointer;
 }
 .user-account_name {
-    display: inline-block;
-    cursor: pointer;
-    max-width: 152px;
-    width: 150px;
+    display: flex;
+    max-width: 300px;
+    width: 250px;
     height: 30px;
     border-bottom: 2px solid maroon;
 }
+.user-account_name p {
+    opacity: 0.2;
+}
 .user-account_icon {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-top: 5px;
 }
 .Button_view_button {
-    cursor: pointer;
     display: flex;
     padding: 6px;
     margin-top: 10px;
+    cursor: pointer;
 }
