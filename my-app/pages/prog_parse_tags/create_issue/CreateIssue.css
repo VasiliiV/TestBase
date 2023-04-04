@@ -1,0 +1,29 @@
+* {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+}
+.dialog-for-task {
+    border-radius: 4px 4px 4px 4px;
+    background-color: #ece2e2;
+    width: 810px;
+    position: fixed;
+    left: 500px;
+    top: 232px;
+    height: 810px;
+    margin-left: -150px;
+    margin-top: -160.5px;
+    opacity: 0.9;
+}
+.aui {
+    position: static;
+}
+.form-body {
+    max-height: 731px;
+}
+.buttons-container {
+    box-sizing: border-box;
+    clear: both;
+    margin: 1px 0 0 0;
+    padding: 4px 0 4px 145px;
+    position: relative;
+    width: 100%;
+} /*это стиль для нижней панели*/
