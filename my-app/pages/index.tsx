@@ -6,6 +6,7 @@ import App from './_app'
 import React from 'react'
 import { ReactDOM } from 'react'
 import SectionImage from './prog_parse_tags/blog_for_image/SectionImage'
+import CreateIssue from './prog_parse_tags/create_issue/CreateIssue'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,6 +22,7 @@ export default function Home() {
       </Head>
       <Main/>
       <SectionImage/>
+      <CreateIssue/>
     </>
   )
 }

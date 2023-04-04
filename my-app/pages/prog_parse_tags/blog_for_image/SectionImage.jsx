@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-    const SectionImage = () => {
+    
+const SectionImage = () => {
     const [userName, setUserName] = useState("");
     const handleClick = async () => {
     const response = await fetch('/api/click', { method: 'GET' });
