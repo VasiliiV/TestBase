@@ -10,4 +10,4 @@
 
 <br/>Данный проект реализован на next.js, 
 <br/>также есть бэк, который работает вместе с базой данных на sqlite.
-<br/>Команда для загрузки приложения из Docker-а: docker pull volgin69/testbase:testbase
+<br/>Команда для загрузки приложения(доступная устаревшая версия) из Docker-а: docker pull volgin69/testbase:testbase
