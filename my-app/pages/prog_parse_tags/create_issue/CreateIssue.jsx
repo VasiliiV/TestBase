@@ -9,7 +9,7 @@ function CreateIssue() {
     
 
     return isOpen ? (
-        <div className="dialog-for-task" style={{display: 'none'}}>
+        <div className="dialog-for-task">
             <div>
                 <button title="Close" className="button__close" onClick={handleClose}>
                     <span>
@@ -27,7 +27,7 @@ function CreateIssue() {
                     <div className="form-body">
                         <div className="group__form-body">
                             <h3>Project</h3>
-                            <input className="input__form-body" maxlength="255" placeholder="" type="text" spellcheck="true"></input>
+                            <input className="input__form-body" maxLength="255" placeholder="" type="text" spellCheck="true"></input>
                         </div>
                         <div className="group__form-body">
                             <h3>Issue Type</h3>
