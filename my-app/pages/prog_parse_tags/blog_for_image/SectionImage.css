@@ -24,7 +24,12 @@
     margin-top: 5px;
 }
 .Button_view_button {
-    display: flex;
+    padding: 6px;
+    margin-top: 10px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+.Button_add_task {
     padding: 6px;
     margin-top: 10px;
     cursor: pointer;
