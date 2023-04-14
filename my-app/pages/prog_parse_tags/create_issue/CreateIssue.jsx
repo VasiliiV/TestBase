@@ -41,7 +41,12 @@ function CreateIssue() {
                                 <option value="5">Test Plan</option>
                             </select>
                         </div>
+                        <hr/>
+                        <div className="content">
+                            content
+                        </div>
                     </div>
+                    <hr/>
                     <div className="buttons-container form-footer">
 нижняя панель с кнопками
                     </div>
