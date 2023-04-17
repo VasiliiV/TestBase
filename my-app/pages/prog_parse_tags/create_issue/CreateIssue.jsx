@@ -10,17 +10,19 @@ function CreateIssue() {
 
     return isOpen ? (
         <div className="dialog-for-task">
-            <div>
-                <button title="Close" className="button__close" onClick={handleClose}>
-                    <span>
-                        <mat-icon>
-                            <img src="/symbolize-x.png" alt="" className="icon__close"/>
-                        </mat-icon> 
-                    </span>
-                </button>
-            </div>
-            <div className="dialog-heading">
-                <h2 title="Create Issue">Create Issue</h2>
+            <div className="dialog-heading__basic">
+                <div>
+                    <button title="Close" className="button__close" onClick={handleClose}>
+                        <span>
+                            <mat-icon>
+                                <img src="/symbolize-x.png" alt="" className="icon__close"/>
+                            </mat-icon> 
+                        </span>
+                    </button>
+                </div>
+                <div className="dialog-heading">
+                    <h2 title="Create Issue">Create Issue</h2>
+                </div>
             </div>
             <div className="dialog-content">
                 <form action="" className="aui">
@@ -43,12 +45,107 @@ function CreateIssue() {
                         </div>
                         <hr/>
                         <div className="content">
-                            content
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Original Estimate</h3>
+                                <input type="text" name="" id="" />
+                            </div>
                         </div>
                     </div>
                     <hr/>
                     <div className="buttons-container form-footer">
-нижняя панель с кнопками
+<h3>нижняя панель с кнопками</h3>
                     </div>
                 </form>
             </div>
