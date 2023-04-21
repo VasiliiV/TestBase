@@ -22,7 +22,9 @@ function CreateIssue() {
                 </div>
                 <div className="dialog-heading">
                     <h2 title="Create Issue">Create Issue</h2>
+                    <h4 title="Create Issue">from Jira</h4>
                 </div>
+                <hr/>
             </div>
             <div className="dialog-content">
                 <form action="" className="aui">
@@ -50,104 +52,142 @@ function CreateIssue() {
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Remaining Estimate</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Severity</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Priority</h3>
+                                <select className="select__form-body">
+                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1">Highest</option>
+                                    <option value="2">High</option>
+                                    <option value="3">Medium</option>
+                                    <option value="4">Low</option>
+                                    <option value="5">Lowest</option>
+                            </select>
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Affects Version/s</h3>
+                                <select className="select__form-body">
+                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1">1.14.1</option>
+                                    <option value="2">1.14.0</option>
+                                    <option value="3">1.13.0</option>
+                                    <option value="4">1.12.0</option>
+                                    <option value="5">1.11.0</option>
+                                </select>
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Fix Version/s</h3>
+                                <select className="select__form-body">
+                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1">1.14.1</option>
+                                    <option value="2">1.14.0</option>
+                                    <option value="3">1.13.0</option>
+                                    <option value="4">1.12.0</option>
+                                    <option value="5">1.11.0</option>
+                                </select>
+                            </div>
+                            <div className="content_estimate">
+                                <h3>build</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Assignee</h3>
+                                <select className="select__form-body">
+                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1">Vasilii Volgin</option>
+                                    <option value="2">Feda Pupkin</option>
+                                    <option value="3">Alex Doska</option>
+                                    <option value="4">Anna Fedkina</option>
+                                    <option value="5">Andrei Chuchka</option>
+                                </select>
+                            </div>
+                            <div className="content_estimate">
+                                <h3>Component/s</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Summary</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Description</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Шаги для воспроизведения</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Attachment</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Labels</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Клиент</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Linked Issues</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Issue</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>QA</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Environment</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Epic Link</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Planned start</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Planned finish</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Контакты клиента</h3>
                                 <input type="text" name="" id="" />
                             </div>
                             <div className="content_estimate">
-                                <h3>Original Estimate</h3>
-                                <input type="text" name="" id="" />
-                            </div>
-                            <div className="content_estimate">
-                                <h3>Original Estimate</h3>
-                                <input type="text" name="" id="" />
-                            </div>
-                            <div className="content_estimate">
-                                <h3>Original Estimate</h3>
-                                <input type="text" name="" id="" />
-                            </div>
-                            <div className="content_estimate">
-                                <h3>Original Estimate</h3>
-                                <input type="text" name="" id="" />
-                            </div>
-                            <div className="content_estimate">
-                                <h3>Original Estimate</h3>
+                                <h3>Sprint</h3>
                                 <input type="text" name="" id="" />
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div className="buttons-container form-footer">
-<h3>нижняя панель с кнопками</h3>
-                    </div>
+                
                 </form>
+                
+            </div>
+            <div>
+            <hr/>
+                <div className="buttons-container form-footer">
+                    <h3>нижняя панель с кнопками</h3>
+                    <button className="Button_view_button" type="button">
+                        Add userName
+                    </button>
+                    <button className="Button_add_task" type="button">
+                        Add task
+                    </button>
+                </div>
             </div>
         </div>
     ): null;
