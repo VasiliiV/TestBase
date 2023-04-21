@@ -22,7 +22,9 @@ function CreateIssue() {
                 </div>
                 <div className="dialog-heading">
                     <h2 title="Create Issue">Create Issue</h2>
+                    <h4 title="Create Issue">from Jira</h4>
                 </div>
+                <hr/>
             </div>
             <div className="dialog-content">
                 <form action="" className="aui">
@@ -171,11 +173,21 @@ function CreateIssue() {
                             </div>
                         </div>
                     </div>
-                    <hr/>
-                    <div className="buttons-container form-footer">
-<h3>нижняя панель с кнопками</h3>
-                    </div>
+                
                 </form>
+                
+            </div>
+            <div>
+            <hr/>
+                <div className="buttons-container form-footer">
+                    <h3>нижняя панель с кнопками</h3>
+                    <button className="Button_view_button" type="button">
+                        Add userName
+                    </button>
+                    <button className="Button_add_task" type="button">
+                        Add task
+                    </button>
+                </div>
             </div>
         </div>
     ): null;
