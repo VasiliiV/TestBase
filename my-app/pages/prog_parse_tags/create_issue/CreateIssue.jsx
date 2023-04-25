@@ -37,8 +37,8 @@ function CreateIssue() {
                             <h3>Issue Type</h3>
                             <select className="select__form-body">
                                 <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                <option value="1">Task</option>
-                                <option value="2">Bug</option>
+                                <option value="1">Bug</option>
+                                <option value="2">Task</option>
                                 <option value="3">Story</option>
                                 <option value="4">Epic</option>
                                 <option value="5">Test Case Template</option>
@@ -117,15 +117,15 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Description</h3>
-                                <input type="text" name="" id="" />
+                                <textarea name="" id="" cols="30" rows="10" maxLength={255}></textarea>
                             </div>
                             <div className="content_estimate">
                                 <h3>Шаги для воспроизведения</h3>
-                                <input type="text" name="" id="" />
+                                <textarea name="" id="" cols="30" rows="10" maxLength={255}></textarea>
                             </div>
                             <div className="content_estimate">
                                 <h3>Attachment</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id="attachment" placeholder="Drop files to attach, or browse."/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Labels</h3>
@@ -180,12 +180,11 @@ function CreateIssue() {
             <div>
             <hr/>
                 <div className="buttons-container form-footer">
-                    <h3>нижняя панель с кнопками</h3>
-                    <button className="Button_view_button" type="button">
-                        Add userName
+                    <button className="button_cancel" type="button">
+                        Cancel
                     </button>
-                    <button className="Button_add_task" type="button">
-                        Add task
+                    <button className="button_create" type="button">
+                        Create
                     </button>
                 </div>
             </div>
