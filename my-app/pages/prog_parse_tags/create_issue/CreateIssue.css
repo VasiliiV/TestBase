@@ -15,6 +15,9 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
+.dialog-heading h2 {
+    margin-top: 0px;
+}
 .dialog-heading__basic {
     background-color: white;
     position: sticky;
@@ -24,8 +27,8 @@
     height: 24px;
     padding: 0;
     position: relative;
-    top: 5px;
-    left: 785px;
+    top: 20px;
+    left: 780px;
 }
 .icon__close {
     width: 100%;
@@ -70,6 +73,13 @@
     display: flex;
     align-items: center;
 }
+.content_estimate textarea {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+#attachment {
+    border: 1px dashed #ccc;
+}
 .content_estimate input {
     margin-left: 20px;
 }
@@ -80,4 +90,31 @@
     padding: 4px 0 4px 145px;
     position: relative;
     width: 100%;
-} /*это стиль для нижней панели*/
+    margin-bottom: 10px;
+}
+.form-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+.button_create {
+    background-color: #0065ff;
+    border-color: transparent;
+    color: #fff;
+    margin-right: 10px;
+    border-radius: 3.01px;
+    cursor: pointer;
+}
+.button_create:hover {
+    background-color: #0d64e7;
+}
+.button_cancel {
+    border-radius: 3.01px;
+    border-color: transparent;
+    color: #0065ff;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.button_cancel:hover {
+    background-color: #edf0f3;
+}
