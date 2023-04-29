@@ -74,6 +74,7 @@ function CreateIssue() {
                                 <h3>Affects Version/s</h3>
                                 <select className="select__form-body">
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1"> </option>
                                     <option value="1">1.14.1</option>
                                     <option value="2">1.14.0</option>
                                     <option value="3">1.13.0</option>
@@ -85,6 +86,7 @@ function CreateIssue() {
                                 <h3>Fix Version/s</h3>
                                 <select className="select__form-body">
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
+                                    <option value="1"> </option>
                                     <option value="1">1.14.1</option>
                                     <option value="2">1.14.0</option>
                                     <option value="3">1.13.0</option>

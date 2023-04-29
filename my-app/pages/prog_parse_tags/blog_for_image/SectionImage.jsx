@@ -10,24 +10,34 @@ const SectionImage = () => {
     const data = await response.json();
     setUserName(data.name);
     };
+
+    const deleteClick = async () => {
+    const response = await fetch('/api/click', { method: 'DELETE' });
+    const data = await response.json();
+    };
 return (
-<div className="headerRight">
-    <div className="headerUser">
-        <div className="user-account" href="">
-            <span className="user-account_name">{userName}<p>Тут отобразится твоё имя</p></span>
-            <div className="user-account_icon">
-                <img src="/multfilm_gomer.png" alt="" width={120} />
+    <div className="headerRight">
+        <div className="headerUser">
+            <div className="user-account" href="">
+                <span className="user-account_name">{userName}<p>Тут будет твоё имя</p></span>
+                <div className="user-account_icon">
+                    <img src="/multfilm_gomer.png" alt="" width={120} />
+                </div>
+                <div className="Button_table_toolbar">
+                    <button className="Button_view_button" type="button" onClick={handleClick}>
+                    Показать имя
+                    </button>
+                    <button className="Button_add_task" type="button" onClick={deleteClick}>
+                    Удалить имя
+                    </button>
+                    <button className="Button_view_button" type="button" onClick={() => setIsCreateIssueOpen(true)}>
+                    Добавить задачу
+                    </button>
+                </div>
             </div>
-            <button className="Button_view_button" type="button" onClick={handleClick}>
-            Add userName
-            </button>
-            <button className="Button_add_task" type="button" onClick={() => setIsCreateIssueOpen(true)}>
-            Add task
-            </button>
         </div>
+        {isCreateIssueOpen && <CreateIssue />}
     </div>
-    {isCreateIssueOpen && <CreateIssue />}
-</div>
-);
+    );
 };
 export default SectionImage;
