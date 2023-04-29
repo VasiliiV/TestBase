@@ -28,9 +28,17 @@ body {
     display: flex;
     align-items: center;
 }
-
+#enterValue {
+    width: 80%;
+}
 #search {
     margin-top: 15px;
+}
+#name {
+    width: 100%;
+}
+#age {
+    width: 100%;
 }
 .inputYand {
     display: flex;

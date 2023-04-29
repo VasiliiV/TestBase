@@ -16,21 +16,24 @@
     height: 30px;
     border-bottom: 2px solid maroon;
 }
+.Button_table_toolbar button {
+    margin-left: 5px;
+}
 .user-account_name p {
     opacity: 0.2;
 }
 .user-account_icon {
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     margin-top: 5px;
+    margin-bottom: 15px;
+}
+.Button_table_toolbar {
+    display: flex;
 }
 .Button_view_button {
     padding: 6px;
-    margin-top: 10px;
     cursor: pointer;
-    margin-right: 15px;
 }
 .Button_add_task {
     padding: 6px;
-    margin-top: 10px;
     cursor: pointer;
 }

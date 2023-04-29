@@ -28,6 +28,18 @@ export default async function click(req, res) {
       name: lastRow.name,
       age: lastRow.age,
     });
+  } else if (req.method === "DELETE") {
+    const db = await open({
+      filename: "./sqlite/parsetags.db",
+      driver: sqlite3.Database,
+    });
+    await db.run(
+      "DELETE FROM tags WHERE id = (SELECT MAX(id) FROM tags)"
+    );
+    await db.close();
+    res.status(200).json({
+      message: "Запись успешно удалена",
+    });
   } else {
     res.status(404).json({ message: "Not found" });
   }

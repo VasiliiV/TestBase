@@ -66,21 +66,18 @@ function Main() {
             </div>
             <div id="body">
                 <div id="">
-                    <div id='header_table'>
-                        <h3>Блок. Добавляй значения и ломай</h3>
-                    </div>
                     <div id='name_block'>
                         <div id="name">
                             <h5>Внеси имя:</h5>
                             <div className='inputName'>
-                                <input type="text" disabled={!isNameChecked} value={nameInputValue} onChange={(event) => setNameInputValue(event.target.value)} />
+                                <input type="text" id="enterValue" disabled={!isNameChecked} value={nameInputValue} onChange={(event) => setNameInputValue(event.target.value)} />
                                 <input type="checkbox" name="" id="" onChange={handleYandexCheckboxChange} />
                             </div>
                         </div>
                         <div id="age">
                             <h5>Внеси возраст:</h5>
                             <div className='inputAge'>
-                                <input type="text" disabled={!isAgeChecked} value={ageInputValue} onChange={(event) => setAgeInputValue(event.target.value)} />
+                                <input type="text" id="enterValue" disabled={!isAgeChecked} value={ageInputValue} onChange={(event) => setAgeInputValue(event.target.value)} />
                                 <input type="checkbox" name="" id="" onChange={handleGoogleCheckboxChange} />
                             </div>
                         </div>
