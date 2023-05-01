@@ -2,11 +2,44 @@ import { useState } from "react";
 
 function CreateIssue() {
     const [isOpen, setIsOpen] = useState(true);
-
-    const handleClose = () => {
-        setIsOpen(false);
-    }
+    const [formData, setFormData] = useState({
+        project: "",
+        issueType: "",
+        originalEstimate: "",
+        remainingEstimate: "",
+        severity: "",
+        priority: "",
+        affectsVersions: "",
+        fixVersions: "",
+        build: "",
+        assignee: "",
+      });
     
+      const handleClose = () => {
+        setIsOpen(false);
+      };
+    
+      const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+      };
+    
+      const createTask = async () => {
+        try {
+          const response = await fetch("/api/create", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const data = await response.json();
+          console.log(data);
+          handleClose();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+        
 
     return isOpen ? (
         <div className="dialog-for-task">
@@ -31,11 +64,11 @@ function CreateIssue() {
                     <div className="form-body">
                         <div className="group__form-body">
                             <h3>Project</h3>
-                            <input className="input__form-body" maxLength="255" placeholder="" type="text" spellCheck="true"></input>
+                            <input className="input__form-body" maxLength="255" placeholder="" type="text" spellCheck="true" value={formData.project} onChange={handleChange}></input>
                         </div>
                         <div className="group__form-body">
                             <h3>Issue Type</h3>
-                            <select className="select__form-body">
+                            <select className="select__form-body" value={formData.issueType} onChange={handleChange}>
                                 <option value="DEFAULT" disabled>Choose a salutation ...</option>
                                 <option value="1">Bug</option>
                                 <option value="2">Task</option>
@@ -49,19 +82,19 @@ function CreateIssue() {
                         <div className="content">
                             <div className="content_estimate">
                                 <h3>Original Estimate</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id="" value={formData.originalEstimate} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Remaining Estimate</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id="" value={formData.remainingEstimate} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Severity</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id="" value={formData.severity} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Priority</h3>
-                                <select className="select__form-body">
+                                <select className="select__form-body" value={formData.priority} onChange={handleChange}>
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
                                     <option value="1">Highest</option>
                                     <option value="2">High</option>
@@ -72,9 +105,8 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Affects Version/s</h3>
-                                <select className="select__form-body">
+                                <select className="select__form-body" value={formData.affectsVersions} onChange={handleChange}>
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1"> </option>
                                     <option value="1">1.14.1</option>
                                     <option value="2">1.14.0</option>
                                     <option value="3">1.13.0</option>
@@ -84,9 +116,8 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Fix Version/s</h3>
-                                <select className="select__form-body">
+                                <select className="select__form-body" value={formData.fixVersions} onChange={handleChange}>
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1"> </option>
                                     <option value="1">1.14.1</option>
                                     <option value="2">1.14.0</option>
                                     <option value="3">1.13.0</option>
@@ -96,11 +127,11 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>build</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id="" value={formData.build} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Assignee</h3>
-                                <select className="select__form-body">
+                                <select className="select__form-body" value={formData.assignee} onChange={handleChange}>
                                     <option value="DEFAULT" disabled>Choose a salutation ...</option>
                                     <option value="1">Vasilii Volgin</option>
                                     <option value="2">Feda Pupkin</option>
@@ -111,7 +142,7 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Component/s</h3>
-                                <input type="text" name="" id="" />
+                                <input type="text" name="" id=""/>
                             </div>
                             <div className="content_estimate">
                                 <h3>Summary</h3>
@@ -185,7 +216,7 @@ function CreateIssue() {
                     <button className="button_cancel" type="button">
                         Cancel
                     </button>
-                    <button className="button_create" type="button">
+                    <button className="button_create" type="button" onClick={createTask}>
                         Create
                     </button>
                 </div>
