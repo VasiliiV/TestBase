@@ -54,6 +54,18 @@ export default async function create(req, res) {
       build,
       assignee
     });
+  } else if (req.method === "DELETE") {
+    const db = await open({
+      filename: "./sqlite/parsetags.db",
+      driver: sqlite3.Database,
+    });
+    await db.run(
+      "DELETE FROM create_task WHERE id = (SELECT MAX(id) FROM create_task)"
+    );
+    await db.close();
+    res.status(200).json({
+      message: "Запись успешно удалена",
+    }); 
   } else {
     res.status(405).json({ message: 'Method Not Allowed' });
     }

@@ -15,6 +15,10 @@ const SectionImage = () => {
     const response = await fetch('/api/click', { method: 'DELETE' });
     const data = await response.json();
     };
+    const deleteClickTask = async () => {
+        const response = await fetch('/api/create', { method: 'DELETE' });
+        const data = await response.json();
+        };
 return (
     <div className="headerRight">
         <div className="headerUser">
@@ -32,6 +36,9 @@ return (
                     </button>
                     <button className="Button_view_button" type="button" onClick={() => setIsCreateIssueOpen(true)}>
                     Добавить задачу
+                    </button>
+                    <button className="Button_add_task" type="button" onClick={deleteClickTask}>
+                    Удалить задачу
                     </button>
                 </div>
             </div>
