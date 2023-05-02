@@ -19,8 +19,12 @@ function CreateIssue() {
         setIsOpen(false);
       };
     
-      const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+      const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
       };
     
       const createTask = async () => {
@@ -64,18 +68,21 @@ function CreateIssue() {
                     <div className="form-body">
                         <div className="group__form-body">
                             <h3>Project</h3>
-                            <input className="input__form-body" maxLength="255" placeholder="" type="text" spellCheck="true" value={formData.project} onChange={handleChange}></input>
+                            <select name="project" className="select__form-body" value={formData.project} onChange={handleChange}>
+                                <option value="1" disabled>Choose a salutation ...</option>
+                                <option value="TestBase">TestBase</option>
+                            </select>
                         </div>
                         <div className="group__form-body">
                             <h3>Issue Type</h3>
-                            <select className="select__form-body" value={formData.issueType} onChange={handleChange}>
-                                <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                <option value="1">Bug</option>
-                                <option value="2">Task</option>
-                                <option value="3">Story</option>
-                                <option value="4">Epic</option>
-                                <option value="5">Test Case Template</option>
-                                <option value="5">Test Plan</option>
+                            <select name="issueType" className="select__form-body" value={formData.issueType} onChange={handleChange}>
+                                <option value="2" disabled>Choose a salutation ...</option>
+                                <option value="Bug">Bug</option>
+                                <option value="Task">Task</option>
+                                <option value="Story">Story</option>
+                                <option value="Epic">Epic</option>
+                                <option value="Test Case Template">Test Case Template</option>
+                                <option value="Test Plan">Test Plan</option>
                             </select>
                         </div>
                         <hr/>
@@ -94,35 +101,35 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Priority</h3>
-                                <select className="select__form-body" value={formData.priority} onChange={handleChange}>
-                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1">Highest</option>
-                                    <option value="2">High</option>
-                                    <option value="3">Medium</option>
-                                    <option value="4">Low</option>
-                                    <option value="5">Lowest</option>
+                                <select name="priority" className="select__form-body" value={formData.priority} onChange={handleChange}>
+                                    <option value="3" disabled>Choose a salutation ...</option>
+                                    <option value="Highest">Highest</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Lowest">Lowest</option>
                             </select>
                             </div>
                             <div className="content_estimate">
                                 <h3>Affects Version/s</h3>
-                                <select className="select__form-body" value={formData.affectsVersions} onChange={handleChange}>
-                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1">1.14.1</option>
-                                    <option value="2">1.14.0</option>
-                                    <option value="3">1.13.0</option>
-                                    <option value="4">1.12.0</option>
-                                    <option value="5">1.11.0</option>
+                                <select name="affectsVersions" className="select__form-body" value={formData.affectsVersions} onChange={handleChange}>
+                                    <option value="4" disabled>Choose a salutation ...</option>
+                                    <option value="1.14.1">1.14.1</option>
+                                    <option value="1.14.0">1.14.0</option>
+                                    <option value="1.13.0">1.13.0</option>
+                                    <option value="1.12.0">1.12.0</option>
+                                    <option value="1.11.0">1.11.0</option>
                                 </select>
                             </div>
                             <div className="content_estimate">
                                 <h3>Fix Version/s</h3>
-                                <select className="select__form-body" value={formData.fixVersions} onChange={handleChange}>
-                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1">1.14.1</option>
-                                    <option value="2">1.14.0</option>
-                                    <option value="3">1.13.0</option>
-                                    <option value="4">1.12.0</option>
-                                    <option value="5">1.11.0</option>
+                                <select name="fixVersions" className="select__form-body" value={formData.fixVersions} onChange={handleChange}>
+                                    <option value="5" disabled>Choose a salutation ...</option>
+                                    <option value="1.14.1">1.14.1</option>
+                                    <option value="1.14.0">1.14.0</option>
+                                    <option value="1.13.0">1.13.0</option>
+                                    <option value="1.12.0">1.12.0</option>
+                                    <option value="1.11.0">1.11.0</option>
                                 </select>
                             </div>
                             <div className="content_estimate">
@@ -131,13 +138,13 @@ function CreateIssue() {
                             </div>
                             <div className="content_estimate">
                                 <h3>Assignee</h3>
-                                <select className="select__form-body" value={formData.assignee} onChange={handleChange}>
-                                    <option value="DEFAULT" disabled>Choose a salutation ...</option>
-                                    <option value="1">Vasilii Volgin</option>
-                                    <option value="2">Feda Pupkin</option>
-                                    <option value="3">Alex Doska</option>
-                                    <option value="4">Anna Fedkina</option>
-                                    <option value="5">Andrei Chuchka</option>
+                                <select name="assignee" className="select__form-body" value={formData.assignee} onChange={handleChange}>
+                                    <option value="6" disabled>Choose a salutation ...</option>
+                                    <option value="Vasilii Volgin">Vasilii Volgin</option>
+                                    <option value="Feda Pupkin">Feda Pupkin</option>
+                                    <option value="Alex Doska">Alex Doska</option>
+                                    <option value="Anna Fedkina">Anna Fedkina</option>
+                                    <option value="Andrei Chuchka">Andrei Chuchka</option>
                                 </select>
                             </div>
                             <div className="content_estimate">
