@@ -59,7 +59,6 @@ function CreateIssue() {
                 </div>
                 <div className="dialog-heading">
                     <h2 title="Create Issue">Create Issue</h2>
-                    <h4 title="Create Issue">from Jira</h4>
                 </div>
                 <hr/>
             </div>
