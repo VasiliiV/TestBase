@@ -9,3 +9,6 @@
     padding-right: 15px;
     opacity: 0.9;
 }
+.inputTestCase__name {
+    border: 0;
+}

@@ -6,7 +6,7 @@ function CreateTestCase() {
         setIsOpen(false);
       };
       
-    return (
+    return isOpen ? (
         <div className="testCase">
             <div>
                     <button title="Close" className="button__close" onClick={handleClose}>
@@ -24,7 +24,9 @@ function CreateTestCase() {
             <div className="testCase__content">
                 <div className="testCaseOverview">
                     <div className="testCaseOverview__primary">
-
+                        <div className="content_estimate">
+                            <input type="text" name="" id="" placeholder="Name test case" className="inputTestCase__name"/>
+                        </div>
                     </div>
                     <div className="testCaseOverview__secondary">
                         
@@ -32,7 +34,7 @@ function CreateTestCase() {
                 </div>
             </div>
         </div>
-    );
+    ): null;
 };
 
 export default CreateTestCase;
