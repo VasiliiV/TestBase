@@ -6,7 +6,7 @@ function CreateTestCase() {
         setIsOpen(false);
       };
       
-    return (
+    return isOpen ? (
         <div className="testCase">
             <div>
                     <button title="Close" className="button__close" onClick={handleClose}>
@@ -64,7 +64,7 @@ function CreateTestCase() {
                 </div>
             </div>
         </div>
-    );
-};
+    ):null;
+    };
 
 export default CreateTestCase;
