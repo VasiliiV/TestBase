@@ -24,7 +24,39 @@ function CreateTestCase() {
             <div className="testCase__content">
                 <div className="testCaseOverview">
                     <div className="testCaseOverview__primary">
+                        <div className="Description">
+                            <section>
+                                <h3 className="Description__header">
+                                    <div className="Description__name">
+                                        Description
+                                    </div>
+                                </h3>
+                                <div className="Description__content">
+                                    <div>
+                                        <textarea name="" id="" cols="30" rows="10">
 
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div className="Scenario">
+                            <section>
+                                <h3 className="Scenario__header">
+                                    <div className="Scenario__name">
+                                        Scenario
+                                    </div>
+                                </h3>
+                                <div className="Scenario__content">
+                                    <div className="Scenario__number">1</div>
+                                    <div>
+                                        <textarea name="" id="" cols="30" rows="10">
+                                            
+                                        </textarea>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                     <div className="testCaseOverview__secondary">
                         

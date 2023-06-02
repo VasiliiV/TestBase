@@ -9,3 +9,10 @@
     padding-right: 15px;
     opacity: 0.9;
 }
+.Scenario__content {
+    display: flex;
+    align-items: center;
+}
+.Scenario__number {
+    margin-right: 5px;
+}
