@@ -62,7 +62,7 @@ function Main() {
     return (
         <div id='main'>
             <div id="header">
-                <h1 className="headerMain">Test base for QA. Welcome!</h1>
+                <h1 className="headerMain">Test base for Junior QA. Welcome!</h1>
             </div>
             <div id="body">
                 <div id="">

@@ -9,10 +9,32 @@
     padding-right: 15px;
     opacity: 0.9;
 }
+.testCase ._Pane {
+    padding: 16px;
+}
 .Scenario__content {
     display: flex;
     align-items: center;
 }
 .Scenario__number {
     margin-right: 5px;
+}
+.testCase__content {
+    padding-top: 16px;
+}
+.testCaseOverview {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+}
+.testCaseOverview__primary {
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+.TestCaseOverview__secondary {
+    flex: 1 1 30%;
+    max-width: 300px;
+    min-width: 200px;
+    overflow: hidden;
+    padding-left: 16px;
 }
