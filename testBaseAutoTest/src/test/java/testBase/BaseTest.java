@@ -3,7 +3,6 @@ package testBase;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.selector.ByText;
 import org.junit.jupiter.api.Test;
-import ru.testrasoft.rig.space.utilities.configuration.annotation.CloseWD;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
