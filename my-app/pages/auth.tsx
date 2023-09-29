@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link';
 import { Inter } from 'next/font/google'
 import Main from './prog_parse_tags/Main'
 import App from './_app'
@@ -25,8 +26,6 @@ export default function Home() {
       <SectionImage/>
       <CreateIssue/>
       <CreateTestCase/>
-      
-      
     </>
   )
 }

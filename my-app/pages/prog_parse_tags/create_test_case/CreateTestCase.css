@@ -3,38 +3,53 @@
     width: 810px;
     height: 810px;
     margin-left: 10px;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0px 0px 10px 5px rgb(202, 199, 199);
-    padding-left: 15px;
-    padding-right: 15px;
-    opacity: 0.9;
+    border-radius: 8px;  /* Изменено для более выраженного закругления */
+    box-shadow: 0px 4px 10px 5px rgb(202, 199, 199); /* Изменено для большей глубины тени */
+    padding: 15px; /* Сокращено для удобства */
+    opacity: 0.95; /* Изменено для меньшей прозрачности */
+    transition: transform 0.3s ease-in-out; /* Добавлено для анимации */
 }
+
+.testCase:hover {
+    transform: scale(1.05); /* Добавлено для увеличения при наведении */
+}
+
 .testCase ._Pane {
-    padding: 16px;
+    padding: 20px; /* Увеличен отступ для большей вентиляции */
 }
+
 .Scenario__content {
     display: flex;
     align-items: center;
+    justify-content: flex-start; /* Добавлено для управления выравниванием элементов */
 }
+
 .Scenario__number {
-    margin-right: 5px;
+    margin-right: 10px; /* Увеличен отступ для большей вентиляции */
 }
+
 .testCase__content {
-    padding-top: 16px;
+    padding-top: 20px; /* Увеличен отступ для большей вентиляции */
 }
+
 .testCaseOverview {
     align-items: flex-start;
     display: flex;
     justify-content: space-between;
+    padding: 16px; /* Добавлено для удобства */
 }
+
 .testCaseOverview__primary {
     flex: 1 1 auto;
     overflow: hidden;
+    margin-right: 16px; /* Добавлено для предотвращения склеивания */
 }
+
 .TestCaseOverview__secondary {
     flex: 1 1 30%;
     max-width: 300px;
     min-width: 200px;
     overflow: hidden;
-    padding-left: 16px;
+    padding-left: 20px; /* Увеличен отступ для большей вентиляции */
 }
+

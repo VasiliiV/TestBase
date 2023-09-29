@@ -13,9 +13,6 @@ export default function AuthUserPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthUser />
-      <Link href="/auth"> 
-        <button type="button">CLICK</button>
-      </Link>
     </>
   );
 }

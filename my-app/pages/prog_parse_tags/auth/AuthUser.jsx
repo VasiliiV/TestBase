@@ -1,13 +1,24 @@
 import { useState } from "react";
+import { useRouter } from 'next/router';
 
 function AuthUser() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const router = useRouter();  // Получение экземпляра маршрутизатора
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (username && password) {
+        if (!username && !password) {
+            setErrorMessage('Пожалуйста, введите имя и пароль');
+        } else if (!username) {
+            setErrorMessage('Пожалуйста, введите имя');
+        } else if (!password) {
+            setErrorMessage('Пожалуйста, введите пароль');
+        } else {
+            setErrorMessage('');
             console.log('Данные для отправки:', { username, password });
             try {
                 const response = await fetch('/api/auth', {
@@ -19,11 +30,12 @@ function AuthUser() {
                 });
                 const data = await response.json();  // Преобразование ответа в JSON
                 console.log(data);  // Вывод данных ответа в консоль
+
+                // Перенаправление пользователя после успешного выполнения запроса
+                router.push('/auth');
             } catch (error) {
                 console.error('Ошибка:', error);
             }
-        } else {
-            alert('Пожалуйста, введите имя и пароль');
         }
     };
 
@@ -56,6 +68,7 @@ function AuthUser() {
                             />
                             <button type="submit">Войти</button>
                         </div>
+                        {errorMessage && <div className="error-message" style={{color: 'red'}}>{errorMessage}</div>}
                     </form>
                     <div className="footer">
                         {/* Footer Content */}
