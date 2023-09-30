@@ -12,7 +12,7 @@ export default async function auth(req, res) {
       await db.close();
       res.status(200).json({
         name: name,
-        age: password,
+        password: password,
       });
     }
   }
