@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import CreateIssue from "../create_issue/CreateIssue";
+import { useRouter } from 'next/router'; 
     
 const SectionImage = () => {
+    const router = useRouter();
     const [userName, setUserName] = useState("");
     const [isCreateIssueOpen, setIsCreateIssueOpen] = useState(false);
 
@@ -19,6 +21,11 @@ const SectionImage = () => {
         const response = await fetch('/api/create', { method: 'DELETE' });
         const data = await response.json();
         };
+
+    const navigateToExam = () => {
+            router.push('/exam'); // убедитесь, что маршрут соответствует пути вашей страницы экзамена
+        };
+
 return (
     <div className="headerRight">
         <div className="headerUser">
@@ -39,6 +46,9 @@ return (
                     </button>
                     <button className="Button_add_task" type="button" onClick={deleteClickTask}>
                     Удалить задачу
+                    </button>
+                    <button className="Button_exam" type="button" onClick={navigateToExam}>
+                    Пройти экзамен
                     </button>
                 </div>
             </div>

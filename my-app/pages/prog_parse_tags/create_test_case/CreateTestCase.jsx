@@ -12,6 +12,9 @@ function CreateTestCase() {
                 
                 <div className="testCase__header">
                     <h2>Test Case</h2>
+                    <button onClick={handleClose} className="closeButton">
+                        Close
+                    </button>
                     <hr/>
                 </div>
                 
