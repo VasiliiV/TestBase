@@ -60,7 +60,6 @@ function CreateIssue() {
                 <div className="dialog-heading">
                     <h2 title="Create Issue">Create Issue</h2>
                 </div>
-                <hr/>
             </div>
             <div className="dialog-content">
                 <form action="" className="aui">

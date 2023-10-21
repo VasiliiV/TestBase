@@ -1,0 +1,74 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to top right,#ef6b50,#f8ad70);
+    height: 100vh;
+}
+
+.main_reg_form {
+    width: 300px;
+    height: 400px;
+    background-color: rgba(255,255,255,.8);  /* увеличил прозрачность для лучшей видимости */
+    border-radius: 8px;  /* добавил скругление углов */
+    max-width: 410px;
+    padding: 30px 55px 37px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);  /* добавил тень */
+}
+
+.head {
+    height: 57px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.head__icon {
+    width: 53px;
+}
+
+.form_input {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;  /* добавил отступ снизу */
+}
+
+.form_input input {
+    padding: 10px;
+    margin-bottom: 10px;  /* добавил отступ между полями ввода */
+    border: 1px solid #ccc;
+    border-radius: 4px;  /* добавил скругление углов */
+    font-size: 16px;
+}
+
+.form_input button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;  /* добавил скругление углов */
+    background-color: #ef6b50;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.form_button {
+    display: contents;
+}
+
+.form_input button:hover {
+    background-color: #f00; 
+}
+

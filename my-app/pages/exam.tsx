@@ -1,9 +1,11 @@
-import Head from 'next/head';
-import AuthUser from './prog_parse_tags/auth/AuthUser.jsx'
-import Link from 'next/link';
+import Head from 'next/head'
+import React from 'react'
+import { ReactDOM } from 'react'
+import ExamList from './prog_parse_tags/exam/Exam'
 
 
-export default function AuthUserPage() {
+
+export default function Exam() {
   return (
     <>
       <Head>
@@ -12,7 +14,7 @@ export default function AuthUserPage() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <AuthUser />
+      <ExamList/>
     </>
-  );
+  )
 }

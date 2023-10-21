@@ -8,19 +8,13 @@ function CreateTestCase() {
       
     return isOpen ? (
         <div className="testCase">
-           <div class="_Pane">
+           <div className="_Pane">
                 
                 <div className="testCase__header">
-                <div>
-                    <button title="Close" className="button__close" onClick={handleClose}>
-                        <span>
-                            <mat-icon>
-                                <img src="/symbolize-x.png" alt="" className="icon__close"/>
-                            </mat-icon> 
-                        </span>
-                    </button>
-                </div>
                     <h2>Test Case</h2>
+                    <button onClick={handleClose} className="closeButton">
+                        Close
+                    </button>
                     <hr/>
                 </div>
                 
@@ -81,7 +75,7 @@ function CreateTestCase() {
                                 <span className="DateTime">2023-06-27 </span>
                                 <span className="DateTime">15:17:08</span>
                             </div>
-                            <div className="class="EditableModal>
+                            <div className="EditableModal">
                             <div>
                                 <h3>Tags</h3>
                             </div>
@@ -89,7 +83,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Issues links</h3>
                             </div>
@@ -97,7 +91,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Test keys</h3>
                             </div>
@@ -105,7 +99,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Members</h3>
                             </div>
@@ -113,7 +107,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Fields</h3>
                             </div>
@@ -121,7 +115,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Relations</h3>
                             </div>
@@ -129,7 +123,7 @@ function CreateTestCase() {
                                 <input type="text" />
                             </div>
                         </div>
-                        <div className="class="EditableModal>
+                        <div className="EditableModal">
                             <div>
                                 <h3>Mutes</h3>
                             </div>
