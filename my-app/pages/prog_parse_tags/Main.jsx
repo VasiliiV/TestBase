@@ -1,5 +1,6 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
+import { useRouter } from 'next/router'; 
 
 
 function Main() {
@@ -59,10 +60,19 @@ function Main() {
           }
 
         }, [isNameChecked, isAgeChecked]);
+
+        const router = useRouter();  // Инициализируйте router
+
+        function exitClick() {
+          router.push('/');  // Замените на путь к вашей странице регистрации
+    }
     return (
         <div id='main'>
             <div id="header">
                 <h1 className="headerMain">Test base for Junior QA. Welcome!</h1>
+            </div>
+            <div style={{display: 'flex', justifyContent: 'flex-end', marginRight: '10px'}}>
+                 <button onClick={exitClick} style={{width: '110px', height: '41px'}}>Выход</button>
             </div>
             <div id="body">
                 <div id="">
