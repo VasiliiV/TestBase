@@ -1,0 +1,12 @@
+<person>
+    <id>1</id>
+    <name>John Doe</name>
+    <roles>
+      <role>Developer</role>
+      <role>Manager</role>
+    </roles>
+    <contact>
+      <email>john.doe@example.com</email>
+      <phone>123456789</phone>
+    </contact>
+  </person>  
