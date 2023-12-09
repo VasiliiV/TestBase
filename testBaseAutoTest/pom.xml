@@ -17,7 +17,7 @@
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
-            <version>6.12.3</version>
+            <version>7.0.4</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -30,37 +30,17 @@
             <version>2.0.5</version>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.9.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ch.exense.step</groupId>
-            <artifactId>selenium-plugin</artifactId>
-            <version>3.10.3</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.exense.step</groupId>
-            <artifactId>jmeter-plugin</artifactId>
-            <version>3.10.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.webjars.npm</groupId>
             <artifactId>step</artifactId>
             <version>0.0.6</version>
         </dependency>
-        <dependency>
-            <groupId>ch.exense.step</groupId>
-            <artifactId>step-api</artifactId>
-            <version>1.1.10</version>
-        </dependency>
+
          <!-- JUnit -->
          <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -77,15 +57,22 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium Plugin -->
         <dependency>
-            <groupId>ch.exense.step</groupId>
-            <artifactId>selenium-plugin</artifactId>
-            <version>3.10.3</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.13.0</version>
         </dependency>
 
     </dependencies>
 
-
-
+    <build>
+        <plugins>
+            <!-- Allure Maven plugin -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
