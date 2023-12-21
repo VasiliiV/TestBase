@@ -1,5 +1,6 @@
 package testBase;
 
+import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,7 @@ import java.sql.Connection;
 import static com.codeborne.selenide.Selenide.*;
 import static testBase.AuthUserPage.*;
 
+@Epic("Авторизация")
 public class AuthUserTest {
 
     private static final String BASE_URL = "http://localhost:3000";
@@ -21,7 +23,7 @@ public class AuthUserTest {
         BdConnection.close(connection);
     }
 
-    @Test
+    @Test()
     public void openSiteAndPerformActions() {
         open(BASE_URL);
         enterUserName();
