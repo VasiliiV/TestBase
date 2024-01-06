@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
-import static testBase.BdConnection.connect;
+import static testBase.DBConnection.connect;
 
 public class AuthUserPage {
 
@@ -46,15 +46,15 @@ public class AuthUserPage {
                 .click();
     }
 
-    @Step
+    @Step("Удаление всех записей из таблицы user")
     public static void deleteAllUsers() {
         String sql = "DELETE FROM user";
 
         try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
 
             // Выполнение запроса
-            int affectedRows = pstmt.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
             System.out.println(affectedRows + " строк удалены.");
 
         } catch (SQLException e) {

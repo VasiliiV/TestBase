@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class BdConnection {
-
+public class DBConnection {
     private static final String URL = "jdbc:sqlite:/Users/vasilii/Documents/TestBase/my-app/sqlite/parsetags.db";
 
     public static Connection connect() {
@@ -25,6 +24,7 @@ public class BdConnection {
             try {
                 // Закрытие соединения
                 conn.close();
+                System.out.println("Соединение с SQLite закрыто");
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
