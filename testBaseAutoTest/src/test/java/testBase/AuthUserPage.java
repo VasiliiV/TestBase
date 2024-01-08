@@ -36,7 +36,7 @@ public class AuthUserPage {
     @Step
     public static void checkValidation() {
         $(byText("Имя пользователя или пароль не верны"))
-                .shouldBe(visible.because("Валидация на не зарегестируровавшего полтзователя не поиявилась"));
+                .shouldBe(visible.because("Валидация на незарегестрировавшего пользователя не появилась"));
     }
 
     @Step
