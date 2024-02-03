@@ -3,11 +3,11 @@
     width: 810px;
     height: 810px;
     margin-left: 10px;
-    border-radius: 8px;  /* Изменено для более выраженного закругления */
-    box-shadow: 0px 4px 10px 5px rgb(202, 199, 199); /* Изменено для большей глубины тени */
-    padding: 15px; /* Сокращено для удобства */
-    opacity: 0.95; /* Изменено для меньшей прозрачности */
-    transition: transform 0.3s ease-in-out; /* Добавлено для анимации */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px 5px rgb(202, 199, 199);
+    padding: 15px;
+    opacity: 0.95;
+    transition: transform 0.3s ease-in-out;
     position: relative;
 }
 
@@ -16,49 +16,49 @@
     background-color: transparent;
     cursor: pointer;
     padding: 0;
-    font-size: 1.5rem; /* Размер может быть изменен в зависимости от вашего дизайна */
+    font-size: 1.5rem;
     position: absolute;
     top: 15px;
     right: 15px;
 }
 
 .closeButton:hover {
-    color: #de6262; /* Легко менять цвет при наведении */
+    color: #de6262;
 }
 
 .testCase:hover {
-    transform: scale(1.05); /* Добавлено для увеличения при наведении */
+    transform: scale(1.05);
 }
 
 .testCase ._Pane {
-    padding: 20px; /* Увеличен отступ для большей вентиляции */
+    padding: 20px;
 }
 
 .Scenario__content {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Добавлено для управления выравниванием элементов */
+    justify-content: flex-start;
 }
 
 .Scenario__number {
-    margin-right: 10px; /* Увеличен отступ для большей вентиляции */
+    margin-right: 10px;
 }
 
 .testCase__content {
-    padding-top: 20px; /* Увеличен отступ для большей вентиляции */
+    padding-top: 20px;
 }
 
 .testCaseOverview {
     align-items: flex-start;
     display: flex;
     justify-content: space-between;
-    padding: 16px; /* Добавлено для удобства */
+    padding: 16px;
 }
 
 .testCaseOverview__primary {
     flex: 1 1 auto;
     overflow: hidden;
-    margin-right: 16px; /* Добавлено для предотвращения склеивания */
+    margin-right: 16px;
 }
 
 .TestCaseOverview__secondary {
@@ -66,17 +66,17 @@
     max-width: 300px;
     min-width: 200px;
     overflow: hidden;
-    padding-left: 20px; /* Увеличен отступ для большей вентиляции */
+    padding-left: 20px;
 }
 
 textarea {
     width: 100%;
     padding: 10px;
-    border-radius: 4px; /* Сглаживание углов для современного внешнего вида */
+    border-radius: 4px;
     border: 1px solid #ccc;
     transition: border-color 0.2s ease;
 }
 
 textarea:focus {
-    border-color: #4d90fe; /* Цвет акцента, который обычно используется для обозначения фокуса */
+    border-color: #4d90fe;
 }

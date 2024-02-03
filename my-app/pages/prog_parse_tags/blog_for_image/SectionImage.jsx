@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import CreateIssue from "../create_issue/CreateIssue";
+import CreateTestCase from "../create_test_case/CreateTestCase";
 import { useRouter } from 'next/router'; 
     
 const SectionImage = () => {
     const router = useRouter();
     const [userName, setUserName] = useState("");
     const [isCreateIssueOpen, setIsCreateIssueOpen] = useState(false);
+    const [isCreateTestCaseOpen, setIsCreateTestCaseOpen] = useState(false);
 
     const handleClick = async () => {
     const response = await fetch('/api/click', { method: 'GET' });
@@ -41,6 +43,9 @@ return (
                     <button className="Button_add_task" type="button" onClick={deleteClick}>
                     Удалить имя
                     </button>
+                    <button className="Button_view_button" type="button" onClick={() => setIsCreateTestCaseOpen(true)}>
+                    Добавить тест кейс
+                    </button>
                     <button className="Button_view_button" type="button" onClick={() => setIsCreateIssueOpen(true)}>
                     Добавить задачу
                     </button>
@@ -54,6 +59,7 @@ return (
             </div>
         </div>
         {isCreateIssueOpen && <CreateIssue />}
+        {isCreateTestCaseOpen && <CreateTestCase />}
     </div>
     );
 };
