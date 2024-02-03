@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 
 function Main() {
-
             function handleParseButtonClick() {
               const data = {
                 name: isNameChecked ? nameInputValue : '',
@@ -27,8 +26,6 @@ function Main() {
                 });
             }
   
-  
-
   //disable is input with click check-box
             const [isNameChecked, setIsNameChecked] = useState(false);
             const [isAgeChecked, setIsAgeChecked] = useState(false);
@@ -61,10 +58,10 @@ function Main() {
 
         }, [isNameChecked, isAgeChecked]);
 
-        const router = useRouter();  // Инициализируйте router
+        const router = useRouter();  
 
         function exitClick() {
-          router.push('/');  // Замените на путь к вашей странице регистрации
+          router.push('/');  
     }
     return (
         <div id='main'>
