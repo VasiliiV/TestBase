@@ -14,32 +14,32 @@ import static testBase.DBConnection.connect;
 
 public class AuthUserPage {
 
-    @Step
+    @Step("Нажать кнопку 'Войти'")
     public static void clickOpen() {
         $(byText("Войти")).click();
     }
 
-    @Step
+    @Step("Ввести имя пользователя 'Vasiliy32'")
     public static void enterUserName() {
         $(By.id("username"))
                 .shouldBe(visible)
                 .setValue("Vasiliy32");
     }
 
-    @Step
+    @Step("Ввести пароль '32'")
     public static void enterPassword() {
         $(By.id("password"))
                 .shouldBe(visible)
                 .setValue("32");
     }
 
-    @Step
+    @Step("Проверить валидацию для незарегистрированного пользователя")
     public static void checkValidation() {
         $(byText("Имя пользователя или пароль не верны"))
                 .shouldBe(visible.because("Валидация на незарегестрировавшего пользователя не появилась"));
     }
 
-    @Step
+    @Step("Нажать кнопку 'Регистрация'")
     public static void clickReg() {
         $(byText("Регистрация"))
                 .shouldBe(visible)
