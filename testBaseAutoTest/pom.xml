@@ -97,15 +97,6 @@
                     <reportVersion>${allure.version}</reportVersion>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>generate-allure-report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>serve</goal> <!-- Используйте serve для локального просмотра отчетов -->
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
