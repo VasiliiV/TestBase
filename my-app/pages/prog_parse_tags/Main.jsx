@@ -5,6 +5,14 @@ import { useRouter } from 'next/router';
 
 function Main() {
             function handleParseButtonClick() {
+              const token = localStorage.getItem('token'); 
+            
+              // Проверяем, есть ли токен перед отправкой запроса
+              if (!token) {
+                console.log('Токен не найден, пожалуйста, авторизуйтесь.');
+                return; // Остановим выполнение функции, если токен отсутствует
+              }
+            
               const data = {
                 name: isNameChecked ? nameInputValue : '',
                 age: isAgeChecked ? ageInputValue : ''
@@ -13,18 +21,25 @@ function Main() {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
-                  'Content-Type': 'application/json'
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}` // Добавляем токен в заголовок
                 }
               })
-                .then(response => {
-                  // Обработка ответа здесь
-                  console.log(response);
-                })
-                .catch(error => {
-                  // Обработка ошибки здесь
-                  console.error(error);
-                });
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json(); // Обработка ответа здесь
+              })
+              .then(data => {
+                console.log(data);
+              })
+              .catch(error => {
+                // Обработка ошибки здесь
+                console.error('Ошибка при запросе:', error);
+              });
             }
+  
   
   //disable is input with click check-box
             const [isNameChecked, setIsNameChecked] = useState(false);

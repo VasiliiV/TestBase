@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-04-14T12:39:57Z" name="Surefire suite" finished-at="2024-04-14T12:40:06Z" duration-ms="8825">
+    <groups>
+    </groups>
+    <test started-at="2024-04-14T12:39:57Z" name="Surefire test" finished-at="2024-04-14T12:40:06Z" duration-ms="8825">
+      <class name="testBase.AuthUserTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:testBase.AuthUserTest@22ff4249]" started-at="2024-04-14T12:39:57Z" name="setUp" finished-at="2024-04-14T12:39:58Z" duration-ms="959" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="openSiteAndPerformActions()[pri:1, instance:testBase.AuthUserTest@22ff4249]" started-at="2024-04-14T12:39:58Z" name="openSiteAndPerformActions" finished-at="2024-04-14T12:40:05Z" duration-ms="6565" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- openSiteAndPerformActions -->
+        <test-method signature="clearBdUser()[pri:2, instance:testBase.AuthUserTest@22ff4249]" started-at="2024-04-14T12:40:05Z" name="clearBdUser" finished-at="2024-04-14T12:40:05Z" duration-ms="20" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearBdUser -->
+        <test-method signature="clickButtonTest()[pri:3, instance:testBase.AuthUserTest@22ff4249]" started-at="2024-04-14T12:40:05Z" name="clickButtonTest" finished-at="2024-04-14T12:40:06Z" duration-ms="834" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clickButtonTest -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:testBase.AuthUserTest@22ff4249]" started-at="2024-04-14T12:40:06Z" name="tearDown" finished-at="2024-04-14T12:40:06Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- testBase.AuthUserTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

@@ -1,0 +1,5 @@
+testBase/AuthUserTest.class
+testBase/BaseTest.class
+testBase/AuthUserPage.class
+testBase/ApiRoute.class
+testBase/DBConnection.class

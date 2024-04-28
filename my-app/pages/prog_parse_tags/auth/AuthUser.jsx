@@ -10,7 +10,14 @@ function AuthUser() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        // ... проверка на пустые поля и вывод ошибок
+        // Очищаем предыдущие ошибки
+        setErrorMessage('');
+
+        // Простая проверка на пустые поля
+        if (!username || !password) {
+            setErrorMessage('Имя пользователя и пароль обязательны.');
+            return;
+        }
 
         try {
             const response = await fetch('/api/login', {
@@ -22,18 +29,29 @@ function AuthUser() {
             });
             const data = await response.json();
             if (data.success) {
+                // Сохраняем токен в localStorage
+                localStorage.setItem('token', data.accessToken);
+                // Перенаправляем на защищенную страницу
                 router.push('/auth');
             } else {
                 setErrorMessage(data.message);
             }
         } catch (error) {
             console.error('Ошибка:', error);
+            setErrorMessage('Произошла ошибка при авторизации.');
         }
     };
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        // ... проверка на пустые поля и вывод ошибок
+        // Очищаем предыдущие ошибки
+        setErrorMessage('');
+
+        // Простая проверка на пустые поля
+        if (!username || !password) {
+            setErrorMessage('Имя пользователя и пароль обязательны.');
+            return;
+        }
 
         try {
             const response = await fetch('/api/register', {
@@ -51,6 +69,7 @@ function AuthUser() {
             }
         } catch (error) {
             console.error('Ошибка:', error);
+            setErrorMessage('Произошла ошибка при регистрации.');
         }
     };
 
@@ -59,7 +78,7 @@ function AuthUser() {
             <div className="main_reg">
                 <div className="main_reg_form">
                     <div className="head">
-                        <img className="head__icon" src="icon.png" onError={(e) => { e.target.onerror = null; e.target.src = '/tpl/img/sign/logo_w.png'; }} alt="" />
+                        {/* Заголовок или логотип */}
                     </div>
                     <form id="authForm">
                         <div className="form_input">
@@ -87,7 +106,7 @@ function AuthUser() {
                         {errorMessage && <div className="error-message" style={{color: 'red'}}>{errorMessage}</div>}
                     </form>
                     <div className="footer">
-                        {/* Footer Content */}
+                        {/* Содержимое футера, если необходимо */}
                     </div>
                 </div>
             </div>
