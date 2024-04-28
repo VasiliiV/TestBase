@@ -1,6 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
-import authenticate from './authenticate.js'; 
+import authenticate from './authenticate.js';
+
 export default async function create(req, res) {
   // Подключение к базе данных
   const db = await open({
@@ -48,23 +49,24 @@ export default async function create(req, res) {
           );
           
           res.status(200).json({
-            project,
-            issueType,
-            originalEstimate,
-            remainingEstimate,
-            severity,
-            priority,
-            affectsVersions,
-            fixVersions,
-            build,
-            assignee
+            message: "Задача успешно создана",
+            data: {
+              project,
+              issueType,
+              originalEstimate,
+              remainingEstimate,
+              severity,
+              priority,
+              affectsVersions,
+              fixVersions,
+              build,
+              assignee
+            }
           });
         } else if (req.method === 'DELETE') {
           // Здесь обрабатываем DELETE-запрос
           await db.run("DELETE FROM create_task WHERE id = (SELECT MAX(id) FROM create_task)");
-          res.status(200).json({
-            message: "Запись успешно удалена",
-          });
+          res.status(200).json({ message: "Запись успешно удалена" });
         }
       } catch (error) {
         console.error(error);
@@ -74,7 +76,6 @@ export default async function create(req, res) {
       }
     });
   } else {
-    // Если метод не POST или DELETE, возвращаем ошибку 405 Method Not Allowed
     await db.close();
     res.status(405).json({ message: 'Method Not Allowed' });
   }

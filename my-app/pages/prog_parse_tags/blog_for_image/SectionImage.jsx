@@ -6,28 +6,55 @@ import { useRouter } from 'next/router';
 const SectionImage = () => {
     const router = useRouter();
     const [userName, setUserName] = useState("");
+
+    // State для управления модальными окнами
     const [isCreateIssueOpen, setIsCreateIssueOpen] = useState(false);
     const [isCreateTestCaseOpen, setIsCreateTestCaseOpen] = useState(false);
 
+    // Функция для получения токена из localStorage
+    const getToken = () => localStorage.getItem('token');
+
+    const fetchWithToken = (url, method) => {
+        const token = getToken();
+        if (!token) {
+            console.log('Токен не найден, пожалуйста, авторизуйтесь.');
+            return;
+        }
+
+        return fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    };
+
     const handleClick = async () => {
-    const response = await fetch('/api/click', { method: 'GET' });
-    const data = await response.json();
-    setUserName(data.name);
+        const response = await fetchWithToken('/api/click', 'GET');
+        if (response) {
+            const data = await response.json();
+            setUserName(data.name);
+        }
     };
 
     const deleteClick = async () => {
-    const response = await fetch('/api/click', { method: 'DELETE' });
-    const data = await response.json();
+        const response = await fetchWithToken('/api/click', 'DELETE');
+        if (response) {
+            // Возможная обработка ответа
+        }
     };
+
     const deleteClickTask = async () => {
-        const response = await fetch('/api/create', { method: 'DELETE' });
-        const data = await response.json();
-        };
+        const response = await fetchWithToken('/api/create', 'DELETE');
+        if (response) {
+            // Возможная обработка ответа
+        }
+    };
 
     const navigateToExam = () => {
-            router.push('/exam'); // убедитесь, что маршрут соответствует пути вашей страницы экзамена
-        };
-
+        router.push('/exam'); // убедитесь, что маршрут соответствует пути вашей страницы экзамена
+    };
 return (
     <div className="headerRight">
         <div className="headerUser">
