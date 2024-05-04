@@ -14,6 +14,8 @@ export default async function login(req, res) {
     try {
       // Проверяем, существует ли уже пользователь с таким именем
       const user = await db.get("SELECT * FROM user WHERE name = ?", name);
+      //const user = await db.get("SELECT * FROM user WHERE name = '" + name + "'");
+
 
       if (user) {
         // Сравниваем предоставленный пароль с хешированным паролем в базе

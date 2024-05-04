@@ -78,7 +78,7 @@ function AuthUser() {
             <div className="main_reg">
                 <div className="main_reg_form">
                     <div className="head">
-                        {/* Заголовок или логотип */}
+                        <h3>Авторизация</h3>
                     </div>
                     <form id="authForm">
                         <div className="form_input">
