@@ -15,12 +15,14 @@ public class BaseTest {
     public void setUp() {
         RestAssured.baseURI = BASE_URL; // Инициализация baseURI для REST-assured
         connection = DBConnection.connect();
+        WireMockConfig.startWireMock(8089); // Запуск WireMock сервера
     }
 
     @AfterClass
     public void tearDown() {
         if (connection != null) {
             DBConnection.close(connection);
+            WireMockConfig.stopWireMock(); // Остановка WireMock сервера
         }
     }
 }

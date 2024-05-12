@@ -3,7 +3,8 @@ package testBase;
 public enum ApiRoute {
     CLICK_BUTTON("/api/click"),
     ANOTHER_ROUTE("/anotherRoute"),
-    YET_ANOTHER_ROUTE("/yetAnotherRoute");
+    YET_ANOTHER_ROUTE("/yetAnotherRoute"),
+    REGISTER("/api/register");
 
     private final String path;
 
