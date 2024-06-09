@@ -1,3 +1,4 @@
+import React from 'react';
 import './style.css'
 import './prog_parse_tags/blog_for_image/SectionImage.css'
 import './prog_parse_tags/create_issue/CreateIssue.css'

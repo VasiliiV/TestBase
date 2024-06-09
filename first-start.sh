@@ -24,6 +24,9 @@ if [ -f "package.json" ]; then
         cp .env.example .env.local
     fi
 
+    echo "Запуска unit tests"
+    npm run test
+
     echo "Запуск приложения..."
     npm run dev
 else

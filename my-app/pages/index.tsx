@@ -1,3 +1,4 @@
+import React from 'react';
 import Head from 'next/head';
 import AuthUser from './prog_parse_tags/auth/AuthUser.jsx'
 import Link from 'next/link';
