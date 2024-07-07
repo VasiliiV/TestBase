@@ -8,12 +8,11 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static com.codeborne.selenide.Selenide.*;
 import static testBase.ApiRoute.*;
 import static testBase.AuthUserPage.*;
 
 @Epic("Авторизация")
-public class AuthUserTest extends BaseTest {
+public class AuthUserTest  {
 
     static String accessToken;
 
@@ -21,7 +20,7 @@ public class AuthUserTest extends BaseTest {
     @Story("Авторизация нового пользователя")
     @Test(priority = 1, enabled = false)
     public void openSiteAndPerformActions() {
-        open(BASE_URL);
+
         enterUserName();
         enterPassword();
         clickOpen();

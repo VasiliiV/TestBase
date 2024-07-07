@@ -2,4 +2,6 @@
 /Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/testBase/AuthUserPage.java
 /Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/testBase/DBConnection.java
 /Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/testBase/ApiRoute.java
+/Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/testBase/WireMockConfig.java
 /Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/testBase/AuthUserTest.java
+/Users/vasilii/Documents/TestBase/testBaseAutoTest/src/test/java/stepdefs/StepDefinitionsTest.java

@@ -1,5 +1,6 @@
 testBase/AuthUserTest.class
-testBase/BaseTest.class
 testBase/AuthUserPage.class
+stepdefs/StepDefinitionsTest.class
 testBase/ApiRoute.class
 testBase/DBConnection.class
+testBase/BaseTest.class
