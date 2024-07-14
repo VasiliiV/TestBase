@@ -8,11 +8,12 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static com.codeborne.selenide.Selenide.*;
 import static testBase.ApiRoute.*;
 import static testBase.AuthUserPage.*;
 
 @Epic("Авторизация")
-public class AuthUserTest  {
+public class AuthUserTest extends BaseTest {
 
     static String accessToken;
 
@@ -20,7 +21,7 @@ public class AuthUserTest  {
     @Story("Авторизация нового пользователя")
     @Test(priority = 1, enabled = false)
     public void openSiteAndPerformActions() {
-
+        open(BASE_URL);
         enterUserName();
         enterPassword();
         clickOpen();
@@ -37,7 +38,7 @@ public class AuthUserTest  {
     }
 
     @Story("Регистрация нового пользователя")
-    @Test(groups = {"api"}, priority = 3, enabled = false)
+    @Test(groups = {"api"}, priority = 3)
     public void regNewUser() {
         Response response = given()
                 .contentType(ContentType.JSON)
@@ -58,7 +59,7 @@ public class AuthUserTest  {
 
     //тест апи запроса
     @Story("Тест API запроса на добавление пользователя в блоке ввода имени и возраста")
-    @Test(priority = 4,groups = {"api"}, enabled = false)
+    @Test(priority = 4,groups = {"api"})
     public void clickButtonTest() {
         Response response = given()
                 .contentType(ContentType.JSON)
