@@ -14,33 +14,26 @@ import static testBase.DBConnection.connect;
 
 public class AuthUserPage {
 
-    @Step("Нажать кнопку 'Войти'")
-    public static void clickOpen() {
-        $(byText("Войти")).click();
-    }
-
-    @Step("Ввести имя пользователя 'Vasiliy32'")
-    public static void enterUserName() {
+    @Step("Авторизация пользователя")
+    public void loginUser(String nameUser, String passwordUser) {
         $(By.id("username"))
                 .shouldBe(visible)
-                .setValue("Vasiliy32");
-    }
-
-    @Step("Ввести пароль '32'")
-    public static void enterPassword() {
+                .setValue(nameUser);
         $(By.id("password"))
                 .shouldBe(visible)
-                .setValue("32");
+                .setValue(passwordUser);
+        $(byText("Войти"))
+                .click();
     }
 
     @Step("Проверить валидацию для незарегистрированного пользователя")
-    public static void checkValidation() {
+    public void checkValidation() {
         $(byText("Имя пользователя или пароль не верны"))
                 .shouldBe(visible.because("Валидация на незарегестрировавшего пользователя не появилась"));
     }
 
     @Step("Нажать кнопку 'Регистрация'")
-    public static void clickReg() {
+    public void clickReg() {
         $(byText("Регистрация"))
                 .shouldBe(visible)
                 .click();

@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -15,19 +16,21 @@ import static testBase.AuthUserPage.*;
 @Epic("Авторизация")
 public class AuthUserTest extends BaseTest {
 
-    static String accessToken;
+    private AuthUserPage authUserPage;
+
+    @BeforeClass
+    public void beforeClass() {
+        authUserPage = new AuthUserPage();
+    }
 
     //тест интерфейса
     @Story("Авторизация нового пользователя")
     @Test(priority = 1, enabled = false)
     public void openSiteAndPerformActions() {
         open(BASE_URL);
-        enterUserName();
-        enterPassword();
-        clickOpen();
-        checkValidation();
-        clickReg();
-        clickOpen();
+        authUserPage.loginUser("Vasiliy32", "32");
+        authUserPage.checkValidation();
+        authUserPage.clickReg();
     }
 
     //тест базы данных
