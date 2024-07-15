@@ -1,21 +1,26 @@
 package testBase;
 
-import ch.qos.logback.classic.Logger;
+import groovy.util.logging.Log4j2;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import java.sql.Connection;
+import java.util.Random;
 
 import static io.restassured.RestAssured.given;
+import static org.testng.Reporter.log;
 import static testBase.ApiRoute.REGISTER;
 
+@Log4j2
 public class BaseTest {
     public static final String BASE_URL = "http://localhost:3000";
+    private static final Logger log = LoggerFactory.getLogger(BaseTest.class);
     static String accessToken;
     protected Connection connection;
 
@@ -29,12 +34,17 @@ public class BaseTest {
 
     @Story("Регистрация нового пользователя")
     private void regNewUser() {
+        Random random = new Random();
+        int nameRandom = random.nextInt(100);
+        // %d спецификатор формата, который используется в методе String.format()
+        String requestBody = String.format("{\n" +
+                "    \"name\": \"%d\",\n" +
+                "    \"password\": \"test\"\n" +
+                "}", nameRandom);
+
         Response response = given()
                 .contentType(ContentType.JSON)
-                .body("{\n" +
-                        "    \"name\" : 778, \n" +
-                        "    \"password\" : \"test\"\n" +
-                        "}")
+                .body(requestBody)
                 .when()
                 .post(REGISTER.getPath())
                 .then()
@@ -43,7 +53,8 @@ public class BaseTest {
                 .response();
 
         accessToken = response.jsonPath().getString("accessToken");
-        System.out.println(accessToken);
+        System.out.println("token: " + accessToken);
+        log(accessToken);
     }
 
     @AfterClass
