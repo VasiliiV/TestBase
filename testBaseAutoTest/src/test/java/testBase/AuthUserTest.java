@@ -28,9 +28,10 @@ public class AuthUserTest extends BaseTest {
     @Test(priority = 1, enabled = false)
     public void openSiteAndPerformActions() {
         open(BASE_URL);
-        authUserPage.loginUser("Vasiliy32", "32");
-        authUserPage.checkValidation();
-        authUserPage.clickReg();
+        authUserPage
+                .loginUser("Vasiliy32", "32")
+                .checkValidation()
+                .clickReg();
     }
 
     //тест базы данных

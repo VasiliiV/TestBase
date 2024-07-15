@@ -15,7 +15,7 @@ import static testBase.DBConnection.connect;
 public class AuthUserPage {
 
     @Step("Авторизация пользователя")
-    public void loginUser(String nameUser, String passwordUser) {
+    public AuthUserPage loginUser(String nameUser, String passwordUser) {
         $(By.id("username"))
                 .shouldBe(visible)
                 .setValue(nameUser);
@@ -24,19 +24,24 @@ public class AuthUserPage {
                 .setValue(passwordUser);
         $(byText("Войти"))
                 .click();
+
+        return this;
     }
 
     @Step("Проверить валидацию для незарегистрированного пользователя")
-    public void checkValidation() {
+    public AuthUserPage checkValidation() {
         $(byText("Имя пользователя или пароль не верны"))
                 .shouldBe(visible.because("Валидация на незарегестрировавшего пользователя не появилась"));
+
+        return this;
     }
 
     @Step("Нажать кнопку 'Регистрация'")
-    public void clickReg() {
+    public AuthUserPage clickReg() {
         $(byText("Регистрация"))
                 .shouldBe(visible)
                 .click();
+        return this;
     }
 
     @Step("Удаление всех записей из таблицы user")
