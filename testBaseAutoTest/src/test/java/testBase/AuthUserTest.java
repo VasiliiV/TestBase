@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 import static io.restassured.RestAssured.given;
 import static com.codeborne.selenide.Selenide.*;
 import static testBase.ApiRoute.*;
@@ -17,10 +19,15 @@ import static testBase.AuthUserPage.*;
 public class AuthUserTest extends BaseTest {
 
     private AuthUserPage authUserPage;
+    private String uniqueName;
+    private String uniquePassword;
 
     @BeforeClass
     public void beforeClass() {
         authUserPage = new AuthUserPage();
+        Random random = new Random();
+        uniqueName = "User" + random.nextInt(100000);
+        uniquePassword = "Pass" + random.nextInt(100000);
     }
 
     //тест интерфейса
@@ -29,7 +36,7 @@ public class AuthUserTest extends BaseTest {
     public void openSiteAndPerformActions() {
         open(BASE_URL);
         authUserPage
-                .loginUser("Vasiliy32", "32")
+                .loginUser(uniqueName, uniquePassword)
                 .checkValidation()
                 .clickReg();
     }
