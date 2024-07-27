@@ -12,10 +12,11 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static testBase.DBConnection.connect;
 
-public class AuthUserPage {
+public class AuthUserPage implements AuthActions {
 
+    @Override
     @Step("Авторизация пользователя")
-    public AuthUserPage loginUser(String nameUser, String passwordUser) {
+    public void loginUser(String nameUser, String passwordUser) {
         $(By.id("username"))
                 .shouldBe(visible)
                 .setValue(nameUser);
@@ -24,24 +25,21 @@ public class AuthUserPage {
                 .setValue(passwordUser);
         $(byText("Войти"))
                 .click();
-
-        return this;
     }
 
+    @Override
     @Step("Проверить валидацию для незарегистрированного пользователя")
-    public AuthUserPage checkValidation() {
+    public void checkValidation() {
         $(byText("Имя пользователя или пароль не верны"))
                 .shouldBe(visible.because("Валидация на незарегестрировавшего пользователя не появилась"));
-
-        return this;
     }
 
+    @Override
     @Step("Нажать кнопку 'Регистрация'")
-    public AuthUserPage clickReg() {
+    public void clickReg() {
         $(byText("Регистрация"))
                 .shouldBe(visible)
                 .click();
-        return this;
     }
 
     @Step("Удаление всех записей из таблицы user")
