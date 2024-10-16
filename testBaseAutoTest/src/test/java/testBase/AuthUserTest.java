@@ -51,45 +51,67 @@ public class AuthUserTest extends BaseTest {
     @Story("Регистрация нового пользователя")
     @Test(groups = {"api"}, priority = 3)
     public void regNewUser() {
-        String body = "{\n" +
-                "    \"name\" : \"" + uniqueName + "\", \n" +
-                "    \"password\" : \"" + uniquePassword + "\"\n" +
-                "}";
-        Response response = apiHelper.postRequest(REGISTER.getPath(), body);
-        response.then().statusCode(200);
+        Allure.step("Отпрвка запроса на регистрацию нового пользователя", () -> {
+            String bodyRequest = "{\n" +
+                    "    \"name\" : \"" + uniqueName + "\", \n" +
+                    "    \"password\" : \"" + uniquePassword + "\"\n" +
+                    "}";
+            Response response = apiHelper.postRequest(REGISTER.getPath(), bodyRequest);
+            response.then().statusCode(200);
 
-        accessToken = response.jsonPath().getString("accessToken");
-        System.out.println(accessToken);
+            accessToken = response.jsonPath().getString("accessToken");
+            log.info(accessToken);
+            Allure.addAttachment("Request", bodyRequest);
+            Allure.addAttachment("Response", response.asString());
+        });
     }
 
     @Story("Тест API запроса на добавление пользователя в блоке ввода имени и возраста")
     @Test(priority = 4, groups = {"api"})
     public void clickButtonTest() {
-        String body = "{\"age\":\"\", \"name\":\"\"}";
-        Response response = given()
-                .contentType(ContentType.JSON)
-                .body(body)
-                .auth().preemptive().oauth2(accessToken)
-                .when()
-                .post(CLICK_BUTTON.getPath())
-                .thenReturn();
+        Allure.step("Отправка запроса на добавление пользователя", () -> {
+            String body = "{\"age\":\"\", \"name\":\"\"}";
 
-        response.then().statusCode(200);
-        Allure.addAttachment("Response Body", "text/plain", response.getBody().asString());
+            Allure.addAttachment("Request Body", body);
+
+            Response response = given()
+                    .contentType(ContentType.JSON)
+                    .body(body)
+                    .auth().preemptive().oauth2(accessToken)
+                    .when()
+                    .post(CLICK_BUTTON.getPath())
+                    .thenReturn();
+
+            Allure.step("Проверка, что ответ содержит статус 200", () -> {
+                response.then().statusCode(200);
+            });
+
+            Allure.addAttachment("Response Body", "text/plain", response.getBody().asString());
+        });
     }
 
     @Story("Регистрация нового пользователя через WireMock")
     @Test(groups = {"api"}, priority = 5)
     public void regNewUserWithWireMock() {
-        String body = "{\n" +
-                "    \"name\" : \"mockUser\", \n" +
-                "    \"password\" : \"mockPassword\"\n" +
-                "}";
-        Response response = apiHelper.postRequest("http://localhost:8089/api/register_mock", body);
-        response.then().statusCode(200);
+        Allure.step("Отправка запроса через WireMock для регистрации пользователя", () -> {
+            String body = "{\n" +
+                    "    \"name\" : \"mockUser\", \n" +
+                    "    \"password\" : \"mockPassword\"\n" +
+                    "}";
 
-        String accessTokenMock = response.jsonPath().getString("accessToken");
-        System.out.println("Access Token from Mock: " + accessTokenMock);
-        Allure.addAttachment("Response Body from Mock", "text/plain", response.getBody().asString());
+            Allure.addAttachment("Request Body", body);
+
+            Response response = apiHelper.postRequest("http://localhost:8089/api/register_mock", body);
+
+            Allure.step("Проверка, что ответ содержит статус 200", () -> {
+                response.then().statusCode(200);
+            });
+
+            String accessTokenMock = response.jsonPath().getString("accessToken");
+            log.info("Access Token from Mock: " + accessTokenMock);
+            Allure.addAttachment("Access Token from Mock", accessTokenMock);
+
+            Allure.addAttachment("Response Body from Mock", "text/plain", response.getBody().asString());
+        });
     }
 }

@@ -20,7 +20,7 @@ import static testBase.ApiRoute.REGISTER;
 @Log4j2
 public class BaseTest {
     public static final String BASE_URL = "http://localhost:3000";
-    private static final Logger log = LoggerFactory.getLogger(BaseTest.class);
+    protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
     static String accessToken;
     protected Connection connection;
 
