@@ -1,20 +1,25 @@
-# syntax=docker/dockerfile:1
-   
-# Использование официального образа node в качестве базового образа
-FROM node
+# этап сборки
+FROM node:18-alpine AS builder
 
-# Установка рабочей директории внутри контейнера
 WORKDIR /app
 
-# Копирование package.json и package-lock.json для установки зависимостей
 COPY package*.json ./
-
-# Установка зависимостей
-RUN npm install
-
-# Копирование файлов проекта внутрь контейнера
 COPY . .
 
-# Запуск сервера приложения на порту 3000
+RUN npm install
+RUN npm run build
+
+# этап запуска
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/next.config.js ./next.config.js
+
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+
+CMD ["npm", "start"]
