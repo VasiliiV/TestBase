@@ -3,18 +3,21 @@ const { compilerOptions } = require('./tsconfig');
 
 module.exports = {
   roots: ['<rootDir>'],
-  transform: {
-    '^.+\\.jsx?$': 'babel-jest',
-    '^.+\\.tsx?$': 'ts-jest',
-    '^.+\\.css$': 'jest-transform-css'
-  },
-  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.jsx?$',
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
-  transformIgnorePatterns: ['<rootDir>/node_modules/'],
+
+  transform: {
+    '^.+\\.(ts|tsx|js|jsx)$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.jest.json' }],
+    '^.+\\.css$': 'jest-transform-css',
+  },
+
+  transformIgnorePatterns: ['/node_modules/'],
+
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+
   moduleNameMapper: {
     ...pathsToModuleNameMapper(compilerOptions.paths || {}, { prefix: '<rootDir>/' }),
-    '\\.(css|scss)$': 'identity-obj-proxy'
+    '\\.(css|scss|sass)$': 'identity-obj-proxy',
   },
-  testEnvironment: 'jest-environment-jsdom'
 };
