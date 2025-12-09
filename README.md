@@ -16,6 +16,55 @@
 
 Проект симулирует мини-продукт — в нём есть UI, API, DB, Docker, WireMock и автоматизация.
 
+## Технологии
+### Frontend
+
+- Next.js
+- Авторизация (JWT + защитa API routes)
+- Jest unit tests
+- UI тесты через Selenide
+
+### Backend
+
+- API на Next.js
+- JWT auth middleware
+- Error handling
+
+### Database
+
+- SQLite
+- Несколько таблиц (user, tags, products, departments и др.)
+- Полноценное CRUD-взаимодействие
+
+### Automation
+
+- Java 19
+- TestNG
+- Selenide
+- RestAssured
+- WireMock (моки API)
+- Allure + шаги + отчёты
+- Page Object паттерн (обновлён и упрощён)
+
+### DevOps
+
+- Docker
+- Multi-stage Dockerfile
+- Jenkinsfile (локальный CI)
+
+## Особенности проекта
+
+- Полноценная авторизация на JWT
+- Роуты API защищены middleware
+- Frontend хранит и отправляет токены
+- Есть моковый сервис для тренировки работы с нестабильными API
+- Есть UI-форма для создания тест-кейсов и баг-репортов
+- Встроенная база SQLite для работы через DevTools
+- Один контейнер Docker с готовым приложением
+- Версия доступна на DockerHub
+```docker pull volgin69/testbase:testbase```
+- Автотесты запускаются через Maven с Allure
+
 ## Обновления v.0.1.11:
 - Реализована система аутентификации с использованием JWT (JSON Web Tokens), позволяющая защитить определенные API роуты и требовать наличия валидного токена для доступа.
 - Добавлена логика на фронтенде для сохранения и использования токена после входа в систему. Теперь авторизованные пользователи могут выполнять защищенные запросы к API.
