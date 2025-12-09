@@ -1,6 +1,5 @@
 package testBase;
 
-import groovy.util.logging.Log4j2;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -14,14 +13,13 @@ import java.sql.Connection;
 import java.util.Random;
 
 import static io.restassured.RestAssured.given;
-import static org.testng.Reporter.log;
 import static testBase.ApiRoute.REGISTER;
 
-@Log4j2
+
 public class BaseTest {
     public static final String BASE_URL = "http://localhost:3000";
     protected static final Logger log = LoggerFactory.getLogger(BaseTest.class);
-    static String accessToken;
+    protected String accessToken;
     protected Connection connection;
 
     @BeforeClass
@@ -53,8 +51,7 @@ public class BaseTest {
                 .response();
 
         accessToken = response.jsonPath().getString("accessToken");
-        System.out.println("token: " + accessToken);
-        log(accessToken);
+        log.info("Access token: {}", accessToken);
     }
 
     @AfterClass

@@ -1,32 +1,34 @@
 package testBase;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
+    private static final Logger log = LoggerFactory.getLogger(DBConnection.class);
     private static final String URL = "jdbc:sqlite:/Users/vasilii/Documents/TestBase/my-app/sqlite/parsetags.db";
 
     public static Connection connect() {
-        Connection conn = null;
         try {
-            // Подключение к базе данных
-            conn = DriverManager.getConnection(URL);
-            System.out.println("Соединение с SQLite установлено");
+            Connection conn = DriverManager.getConnection(URL);
+            log.info("Соединение с SQLite установлено");
+            return conn;
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error("Не удалось подключиться к SQLite", e);
+            return null;
         }
-        return conn;
     }
 
     public static void close(Connection conn) {
         if (conn != null) {
             try {
-                // Закрытие соединения
                 conn.close();
-                System.out.println("Соединение с SQLite закрыто");
+                log.info("Соединение с SQLite закрыто");
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                log.error("Ошибка при закрытии соединения с SQLite", e);
             }
         }
     }

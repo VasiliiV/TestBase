@@ -60,7 +60,7 @@ public class AuthUserTest extends BaseTest {
             response.then().statusCode(200);
 
             accessToken = response.jsonPath().getString("accessToken");
-            log.info(accessToken);
+            log.info("Access token from API: {}", accessToken);
             Allure.addAttachment("Request", bodyRequest);
             Allure.addAttachment("Response", response.asString());
         });
@@ -108,7 +108,7 @@ public class AuthUserTest extends BaseTest {
             });
 
             String accessTokenMock = response.jsonPath().getString("accessToken");
-            log.info("Access Token from Mock: " + accessTokenMock);
+            log.info("Access Token from Mock: {}", accessTokenMock);
             Allure.addAttachment("Access Token from Mock", accessTokenMock);
 
             Allure.addAttachment("Response Body from Mock", "text/plain", response.getBody().asString());
