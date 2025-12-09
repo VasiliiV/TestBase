@@ -1,4 +1,4 @@
-# progaBaseTest v.0.1.13
+# progaBaseTest v.0.1.13 — Full-stack QA Training Platform
 
 Автор: Vasiliy Volgin
 
