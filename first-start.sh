@@ -1,34 +1,36 @@
 #!/bin/bash
+set -e
 
+echo "=== Переход в папку приложения ==="
 cd ./my-app
 
-# Удаление папки node_modules, если она существует
-if [ -d "node_modules" ]; then
-    echo "Удаление существующей папки node_modules..."
-    rm -rf node_modules
-else 
-    echo "Папка node_modules не найдена. Продолжение установки..."
+echo "=== Установка зависимостей ==="
+npm install
+npm install jsonwebtoken bcrypt
+
+# Подготовка env
+if [ ! -f ".env.local" ]; then
+    echo "Создание .env.local из .env.example..."
+    cp .env.example .env.local
 fi
 
-# Проверка наличия файла package.json перед установкой зависимостей
-if [ -f "package.json" ]; then
-    echo "Установка зависимостей..."
-    npm i
+echo "=== Запуск unit-тестов (Jest) ==="
+npm run test
 
-    echo "Установка библиотеки для хеширования паролей и работы с JWT..."
-    npm install jsonwebtoken bcrypt
+echo "=== Запуск приложения в фоне ==="
+npm run dev &
 
-    # Копирование .env.example в .env.local, если последний не существует
-    if [ ! -f ".env.local" ]; then
-        echo "Создание .env.local из .env.example..."
-        cp .env.example .env.local
-    fi
+echo "Ожидание старта приложения..."
+sleep 10
 
-    echo "Запуска unit tests"
-    npm run test
+echo "=== Возврат в корень проекта ==="
+cd ..
 
-    echo "Запуск приложения..."
-    npm run dev
-else
-    echo "Файл package.json не найден. Установка зависимостей невозможна."
-fi
+echo "=== Запуск Playwright тестов ==="
+npx playwright test --config=playwright.config.js
+
+echo "=== Готово ==="
+echo "Приложение продолжает работать в фоне"
+echo "Для остановки приложения вручную используй:"
+echo "  lsof -i :3000"
+echo "  kill <PID>"
