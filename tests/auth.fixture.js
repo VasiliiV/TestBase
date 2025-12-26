@@ -1,17 +1,16 @@
 import { test as base, expect } from '@playwright/test';
 
-function generateUser() {
+export function generateUser(prefix = 'user') {
   const id = Date.now();
   return {
-    name: `user_${id}`,
+    name: `${prefix}_${id}`,
     password: '123456',
   };
 }
 
 export const test = base.extend({
   token: async ({ request }, use) => {
-    const user = generateUser();
-    console.log('🧪 Created test user:', user);
+    const user = generateUser('tokenuser');
 
     // 1️⃣ Первая регистрация — OK
     const registerResponse = await request.post('/api/register', {
@@ -23,7 +22,6 @@ export const test = base.extend({
     const duplicateRegisterResponse = await request.post('/api/register', {
       data: user,
     });
-
     expect(duplicateRegisterResponse.status()).toBe(409);
 
     const duplicateBody = await duplicateRegisterResponse.json();
