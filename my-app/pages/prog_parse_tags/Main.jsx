@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useRouter } from 'next/router';
 
 
@@ -59,66 +59,78 @@ function Main() {
                 setIsAgeChecked(event.target.checked);
             }
 
-        useEffect(() => {
-        const nameInput = document.querySelector('#name input[type="text"]');
-        const googleInput = document.querySelector('#age input[type="text"]');
-
-        if (isNameChecked) {
-            nameInput.disabled = false;
-          } else {
-            nameInput.disabled = true;
-          }
-          
-          if (isAgeChecked) {
-            googleInput.disabled = false;
-          } else {
-            googleInput.disabled = true;
-          }
-
-        }, [isNameChecked, isAgeChecked]);
-
         const router = useRouter();  
 
         function exitClick() {
           router.push('/');  
     }
     return (
-        <div id='main'>
-            <div id="header">
-                <h1 className="headerMain">Test base for Junior QA. Welcome!</h1>
+        <section className="dashboard-hero panel">
+            <div className="dashboard-hero__top">
+                <div>
+                    <span className="pill">TestBase QA Lab</span>
+                    <h1>Тренировочная площадка для тестировщика</h1>
+                    <p className="dashboard-hero__subtitle">
+                        Проверь формы, фиксируй баги, оформляй тест-кейсы — всё в одном месте.
+                    </p>
+                </div>
+                <button className="btn btn-ghost" onClick={exitClick}>Выйти</button>
             </div>
-            <div style={{display: 'flex', justifyContent: 'flex-end', marginRight: '10px'}}>
-                 <button onClick={exitClick} style={{width: '110px', height: '41px'}}>Выход</button>
-            </div>
-            <div id="body">
-                <div id="">
-                    <div id='name_block'>
-                        <div id="name">
-                            <h5>Внеси имя:</h5>
-                            <div className='inputName'>
-                                <input type="text" id="enterValue" disabled={!isNameChecked} value={nameInputValue} onChange={(event) => setNameInputValue(event.target.value)} />
-                                <input type="checkbox" name="" id="" onChange={handleYandexCheckboxChange} />
-                            </div>
+            <div className="dashboard-grid">
+                <div className="dashboard-card">
+                    <h3>Тестовые поля</h3>
+                    <p>Включай чекбоксы и проверяй, как ведут себя поля ввода.</p>
+                    <div className="field-row">
+                        <div className="field-block">
+                            <label>Имя</label>
+                            <input
+                                type="text"
+                                placeholder="Введите имя"
+                                disabled={!isNameChecked}
+                                value={nameInputValue}
+                                onChange={(event) => setNameInputValue(event.target.value)}
+                            />
                         </div>
-                        <div id="age">
-                            <h5>Внеси возраст:</h5>
-                            <div className='inputAge'>
-                                <input type="text" id="enterValue" disabled={!isAgeChecked} value={ageInputValue} onChange={(event) => setAgeInputValue(event.target.value)} />
-                                <input type="checkbox" name="" id="" onChange={handleGoogleCheckboxChange} />
-                            </div>
+                        <label className="toggle">
+                            <input type="checkbox" onChange={handleYandexCheckboxChange} />
+                            <span>Активировать</span>
+                        </label>
+                    </div>
+                    <div className="field-row">
+                        <div className="field-block">
+                            <label>Возраст</label>
+                            <input
+                                type="text"
+                                placeholder="Введите возраст"
+                                disabled={!isAgeChecked}
+                                value={ageInputValue}
+                                onChange={(event) => setAgeInputValue(event.target.value)}
+                            />
                         </div>
-                          <div id="search">
-                              <button onClick={handleParseButtonClick}>Сохранить</button>
-                              {status.message && (
-                                <div style={{ marginTop: '10px', color: status.type === 'error' ? 'red' : 'green' }} aria-live="polite">
-                                  {status.message}
-                                </div>
-                              )}
-                          </div>
-                      </div>
-                  </div>
+                        <label className="toggle">
+                            <input type="checkbox" onChange={handleGoogleCheckboxChange} />
+                            <span>Активировать</span>
+                        </label>
+                    </div>
+                    <div className="dashboard-actions">
+                        <button className="btn btn-primary" onClick={handleParseButtonClick}>Сохранить</button>
+                        {status.message && (
+                            <div className={`status-pill ${status.type === 'error' ? 'status-pill--error' : 'status-pill--success'}`} aria-live="polite">
+                                {status.message}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div className="dashboard-card dashboard-guide">
+                    <h3>Как использовать стенд</h3>
+                    <ol>
+                        <li>Сгенерируй данные, сохрани их и проверь ответ API.</li>
+                        <li>Создай тест-кейс или баг-репорт через панель справа.</li>
+                        <li>Сравни ожидания с фактом — зафиксируй дефекты.</li>
+                    </ol>
+                </div>
             </div>
-        </div>
+        </section>
     );
 }
 export default Main;

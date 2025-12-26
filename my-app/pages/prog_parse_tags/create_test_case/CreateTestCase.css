@@ -1,33 +1,31 @@
 .testCase {
-    background-color: white;
-    width: 810px;
-    height: 810px;
-    margin-left: 10px;
+    background-color: var(--panel);
+    width: min(820px, 92vw);
+    height: auto;
+    max-height: 90vh;
+    margin: 15px auto;
     border-radius: 8px;
-    box-shadow: 0px 4px 10px 5px rgb(202, 199, 199);
+    border: 1px solid var(--border);
     padding: 15px;
     opacity: 0.95;
-    transition: transform 0.3s ease-in-out;
     position: relative;
+    overflow: auto;
 }
 
 .closeButton {
-    border: none;
-    background-color: transparent;
+    border: 1px solid var(--border);
+    background-color: #fff;
     cursor: pointer;
-    padding: 0;
-    font-size: 1.5rem;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.9rem;
     position: absolute;
     top: 15px;
     right: 15px;
 }
 
 .closeButton:hover {
-    color: #de6262;
-}
-
-.testCase:hover {
-    transform: scale(1.05);
+    border-color: var(--ink);
 }
 
 .testCase ._Pane {
@@ -73,10 +71,29 @@ textarea {
     width: 100%;
     padding: 10px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border);
+    background-color: var(--soft);
     transition: border-color 0.2s ease;
 }
 
 textarea:focus {
-    border-color: #4d90fe;
+    border-color: var(--brand);
+    outline: none;
+}
+
+.testCase input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background-color: var(--soft);
+}
+
+.testCase input:focus {
+    border-color: var(--brand);
+    outline: none;
+}
+
+.testCase__footer {
+    margin-top: 10px;
 }

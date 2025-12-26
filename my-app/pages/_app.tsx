@@ -5,6 +5,7 @@ import './prog_parse_tags/create_issue/CreateIssue.css'
 import './prog_parse_tags/create_test_case/CreateTestCase.css'
 import './prog_parse_tags/auth/AuthUser.css'
 import './prog_parse_tags/exam/Exam.css'
+import './prog_parse_tags/training_tasks/TrainingModal.css'
 import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {

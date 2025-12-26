@@ -1,6 +1,5 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import authenticate from './authenticate.js';
+import { openDb, ensureTables } from '../../lib/db';
 
 export default async function create(req, res) {
   const allowedMethods = ['POST', 'DELETE'];
@@ -12,10 +11,8 @@ export default async function create(req, res) {
   return authenticate(req, res, async () => {
     let db;
     try {
-      db = await open({
-        filename: './sqlite/parsetags.db',
-        driver: sqlite3.Database,
-      });
+      db = await openDb();
+      await ensureTables(db);
 
       if (req.method === 'POST') {
         const {
@@ -30,12 +27,14 @@ export default async function create(req, res) {
           build,
           assignee,
         } = req.body;
+        const userName = req.user?.name;
+        const createdAt = new Date().toISOString();
 
         await db.run(
-          `INSERT INTO create_task (
+          `INSERT INTO bags (
               project, issue_type, original_estimate, remaining_estimate, severity, priority,
-              affects_versions, fix_versions, build, assignee
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+              affects_versions, fix_versions, build, assignee, created_at, user_name
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
           [
             project,
             issueType,
@@ -47,6 +46,8 @@ export default async function create(req, res) {
             fixVersions,
             build,
             assignee,
+            createdAt,
+            userName,
           ],
         );
 
@@ -63,11 +64,17 @@ export default async function create(req, res) {
             fixVersions,
             build,
             assignee,
+            createdAt,
           },
         });
       }
 
-      await db.run('DELETE FROM create_task WHERE id = (SELECT MAX(id) FROM create_task)');
+      const userName = req.user?.name;
+      await db.run(
+        `DELETE FROM bags
+         WHERE id = (SELECT id FROM bags WHERE user_name = ? ORDER BY id DESC LIMIT 1)`,
+        userName
+      );
       return res.status(200).json({ message: 'Запись успешно удалена' });
     } catch (error) {
       console.error(error);

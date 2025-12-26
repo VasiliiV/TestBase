@@ -2,6 +2,7 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { getJwtSecrets } from '../../lib/jwtSecrets';
 
 export default async function register(req, res) {
     if (req.method === "POST") {
@@ -25,20 +26,17 @@ export default async function register(req, res) {
             const hashedPassword = await bcrypt.hash(password, 10);
             await db.run("INSERT INTO user (name, password) VALUES (?, ?)", name, hashedPassword);
 
-            // Проверяем наличие переменных окружения
-            if (!process.env.ACCESS_TOKEN_SECRET || !process.env.REFRESH_TOKEN_SECRET) {
-                throw new Error("Необходимые переменные окружения отсутствуют");
-            }
+            const { accessTokenSecret, refreshTokenSecret } = getJwtSecrets();
 
             // Создание токенов
             const accessToken = jwt.sign(
                 { name: name },
-                process.env.ACCESS_TOKEN_SECRET,
+                accessTokenSecret,
                 { expiresIn: '15m' }
             );
             const refreshToken = jwt.sign(
                 { name: name },
-                process.env.REFRESH_TOKEN_SECRET,
+                refreshTokenSecret,
                 { expiresIn: '7d' }
             );
 

@@ -19,11 +19,7 @@
 - Docker + Docker Compose (для контейнерного запуска)
 - Java 11+ и Maven (для Java-автотестов в `testBaseAutoTest`)
 
-Переменные окружения для API лежат в `my-app/.env.example`. Скопируйте файл и задайте секреты перед локальным запуском:
-```bash
-cp my-app/.env.example my-app/.env.local
-# отредактируйте ACCESS_TOKEN_SECRET и REFRESH_TOKEN_SECRET
-```
+Секреты для JWT теперь создаются автоматически при первом обращении к API и сохраняются в `my-app/.local-secrets.json`. При желании можно переопределить их через `ACCESS_TOKEN_SECRET` и `REFRESH_TOKEN_SECRET` в окружении (или в `my-app/.env.local`).
 
 ### 2. Локальный запуск без контейнеров
 ```bash
@@ -81,8 +77,11 @@ docker compose up --build
   - `tests/register.spec.js` — защищённые ручки `/api/click` и `/api/create`
 - Java API: `testBaseAutoTest/src`
 
-## Обновления v.0.1.15
-- JWT-аутентификация на API, хранение токена на фронте
-- UI и API автотесты на Playwright + Allure
-- Dockerfiles и docker-compose для приложения, моков и автотестов
-- Шаги для Allure-отчёта и отдельный сервис автотестов в Compose
+## Обновления (срез текущей работы)
+- Сохранение тест-кейсов и баг-репортов в SQLite с привязкой к пользователю, чтение и удаление из UI.
+- Миграция таблиц: `create_task` → `task`, добавлена `bags`, перенос legacy-данных.
+- Новые API ручки `/api/tasks` и `/api/bags` (GET/POST/DELETE), защита через JWT.
+- Обучающие окна для практики DevTools/БД и заданий для junior QA.
+- Экзамен расширен на 15 вопросов, отдельная страница `/exam`.
+
+Предыдущие обновления из README удалены, чтобы не переполнять файл информацией.

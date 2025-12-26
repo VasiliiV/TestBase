@@ -20,13 +20,14 @@ describe('AuthUser', () => {
 
   test('renders AuthUser component', () => {
     render(<AuthUser />);
-    expect(screen.getByPlaceholderText(/Имя пользователя/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Пароль/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Имя пользователя/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Пароль/i)).toBeInTheDocument();
+    expect(screen.getByText(/Если пользователя нет, он будет создан автоматически/i)).toBeInTheDocument();
   });
 
   test('displays error message when fields are empty on login', () => {
     render(<AuthUser />);
-    fireEvent.click(screen.getByText(/Войти/i));
+    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
     expect(screen.getByText(/Имя пользователя и пароль обязательны./i)).toBeInTheDocument();
   });
 
@@ -38,10 +39,10 @@ describe('AuthUser', () => {
     );
 
     render(<AuthUser />);
-    fireEvent.change(screen.getByPlaceholderText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByPlaceholderText(/Пароль/i), { target: { value: 'testpassword' } });
+    fireEvent.change(screen.getByLabelText(/Имя пользователя/i), { target: { value: 'testuser' } });
+    fireEvent.change(screen.getByLabelText(/Пароль/i), { target: { value: 'testpassword' } });
 
-    fireEvent.click(screen.getByText(/Войти/i));
+    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
 
     await waitFor(() => {
       expect(localStorage.getItem('token')).toBe('fake-token');
@@ -57,55 +58,14 @@ describe('AuthUser', () => {
     );
 
     render(<AuthUser />);
-    fireEvent.change(screen.getByPlaceholderText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByPlaceholderText(/Пароль/i), { target: { value: 'testpassword' } });
+    fireEvent.change(screen.getByLabelText(/Имя пользователя/i), { target: { value: 'testuser' } });
+    fireEvent.change(screen.getByLabelText(/Пароль/i), { target: { value: 'testpassword' } });
 
-    fireEvent.click(screen.getByText(/Войти/i));
+    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
 
     await screen.findByText(/Invalid credentials/i);
 
     expect(screen.getByText(/Invalid credentials/i)).toBeInTheDocument();
   });
 
-  test('displays error message when fields are empty on registration', () => {
-    render(<AuthUser />);
-    fireEvent.click(screen.getByText(/Регистрация/i));
-    expect(screen.getByText(/Имя пользователя и пароль обязательны./i)).toBeInTheDocument();
-  });
-
-  test('successful registration shows success message', async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ success: true }),
-      })
-    );
-
-    render(<AuthUser />);
-    fireEvent.change(screen.getByPlaceholderText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByPlaceholderText(/Пароль/i), { target: { value: 'testpassword' } });
-
-    fireEvent.click(screen.getByText(/Регистрация/i));
-
-    await screen.findByText(/Регистрация прошла успешно/i);
-
-    expect(screen.getByText(/Регистрация прошла успешно/i)).toBeInTheDocument();
-  });
-
-  test('displays error message on failed registration', async () => {
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ success: false, message: 'Registration error' }),
-      })
-    );
-
-    render(<AuthUser />);
-    fireEvent.change(screen.getByPlaceholderText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByPlaceholderText(/Пароль/i), { target: { value: 'testpassword' } });
-
-    fireEvent.click(screen.getByText(/Регистрация/i));
-
-    await screen.findByText(/Registration error/i);
-
-    expect(screen.getByText(/Registration error/i)).toBeInTheDocument();
-  });
 });

@@ -6,7 +6,7 @@ const authHeaders = (token) => ({
 
 test.describe('Protected API flows', () => {
   test('click endpoint supports create/read/delete cycle', async ({ request, token }) => {
-    const payload = { name: 'Playwright User', age: 32 };
+    const payload = { name: 'Playwright User', age: "32" };
 
     const postResponse = await request.post('/api/click', {
       data: payload,

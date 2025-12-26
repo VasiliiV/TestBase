@@ -1,38 +1,59 @@
-.exam {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-  }
-  
-  .exam h1 {
-    text-align: center;
-  }
-  
-  .exam-question {
-    margin-bottom: 20px;
-  }
-  
-  .exam-question label {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  button {
-    display: block;
+.exam-shell {
+    padding: 48px 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.exam-card {
+    width: min(720px, 92vw);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background-color: var(--panel);
+    padding: 32px;
+    animation: fadeUp 0.6s ease;
+}
+
+.exam-header h1 {
+    margin: 10px 0;
+}
+
+.exam-header p {
+    margin: 0 0 24px;
+    color: var(--muted);
+}
+
+.exam-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exam-question {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    background-color: var(--soft);
+}
+
+.exam-answers {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.exam-option {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.exam-option input {
+    accent-color: var(--brand);
+}
+
+.exam-submit {
     width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
+}
   

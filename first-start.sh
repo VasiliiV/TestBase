@@ -8,11 +8,7 @@ echo "=== Установка зависимостей ==="
 npm install
 npm install jsonwebtoken bcrypt
 
-# Подготовка env
-if [ ! -f ".env.local" ]; then
-    echo "Создание .env.local из .env.example..."
-    cp .env.example .env.local
-fi
+# Секреты для JWT генерируются автоматически при первом запуске API
 
 echo "=== Запуск unit-тестов (Jest) ==="
 npm run test

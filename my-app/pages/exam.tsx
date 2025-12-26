@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React from 'react'
-import { ReactDOM } from 'react'
 import ExamList from './prog_parse_tags/exam/Exam'
 
 

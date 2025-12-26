@@ -2,6 +2,7 @@ import sqlite3 from 'sqlite3';
 import { open } from 'sqlite';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { getJwtSecrets } from '../../lib/jwtSecrets';
 
 export default async function login(req, res) {
   if (req.method !== 'POST') {
@@ -9,9 +10,7 @@ export default async function login(req, res) {
     return res.status(405).json({ success: false, message: 'Метод не поддерживается' });
   }
 
-  if (!process.env.ACCESS_TOKEN_SECRET) {
-    return res.status(500).json({ success: false, message: 'Отсутствует секрет для выдачи токена' });
-  }
+  const { accessTokenSecret } = getJwtSecrets();
 
   let db;
   try {
@@ -28,7 +27,7 @@ export default async function login(req, res) {
       if (match) {
         const accessToken = jwt.sign(
           { name: user.name },
-          process.env.ACCESS_TOKEN_SECRET,
+          accessTokenSecret,
           { expiresIn: '1h' }
         );
 
@@ -50,7 +49,7 @@ export default async function login(req, res) {
 
     const accessToken = jwt.sign(
       { name },
-      process.env.ACCESS_TOKEN_SECRET,
+      accessTokenSecret,
       { expiresIn: '1h' }
     );
 
