@@ -73,14 +73,15 @@ docker compose up --build
 ## Автотесты (структура)
 - Jest unit: `my-app/__tests__`
 - Playwright UI+API: `tests/*.spec.js`
-  - `tests/api.spec.js` — регистрация и авторизация
-  - `tests/register.spec.js` — защищённые ручки `/api/click` и `/api/create`
+  - `tests/api.spec.js` — регистрация/авторизация, `/api/hello`, проверка доступа к защищённым ручкам
+  - `tests/register.spec.js` — эндпоинты `/api/click`, `/api/create`, `/api/tasks`, `/api/bags`
 - Java API: `testBaseAutoTest/src`
 
 ## Обновления (срез текущей работы)
 - Сохранение тест-кейсов и баг-репортов в SQLite с привязкой к пользователю, чтение и удаление из UI.
 - Миграция таблиц: `create_task` → `task`, добавлена `bags`, перенос legacy-данных.
 - Новые API ручки `/api/tasks` и `/api/bags` (GET/POST/DELETE), защита через JWT.
+- Добавлены Playwright API-тесты, покрывающие все текущие эндпоинты приложения.
 - Обучающие окна для практики DevTools/БД и заданий для junior QA.
 - Экзамен расширен на 15 вопросов, отдельная страница `/exam`.
 

@@ -49,3 +49,11 @@ test.describe('Protected endpoints', () => {
   });
 });
 
+test.describe('Public endpoints', () => {
+  test('hello endpoint returns default payload', async ({ request }) => {
+    const response = await request.get('/api/hello');
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.name).toBe('John Doe');
+  });
+});
