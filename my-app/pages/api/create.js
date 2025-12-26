@@ -3,20 +3,40 @@ import { open } from 'sqlite';
 import authenticate from './authenticate.js';
 
 export default async function create(req, res) {
-  // Подключение к базе данных
-  const db = await open({
-    filename: './sqlite/parsetags.db',
-    driver: sqlite3.Database,
-  });
+  const allowedMethods = ['POST', 'DELETE'];
+  if (!allowedMethods.includes(req.method)) {
+    res.setHeader('Allow', allowedMethods.join(', '));
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
-  // Проверяем аутентификацию для POST и DELETE запросов
-  if (['POST', 'DELETE'].includes(req.method)) {
-    // authenticate принимает функцию, которая будет выполнена после успешной аутентификации
-    return authenticate(req, res, async () => {
-      try {
-        if (req.method === 'POST') {
-          // Здесь обрабатываем POST-запрос
-          const {
+  return authenticate(req, res, async () => {
+    let db;
+    try {
+      db = await open({
+        filename: './sqlite/parsetags.db',
+        driver: sqlite3.Database,
+      });
+
+      if (req.method === 'POST') {
+        const {
+          project,
+          issueType,
+          originalEstimate,
+          remainingEstimate,
+          severity,
+          priority,
+          affectsVersions,
+          fixVersions,
+          build,
+          assignee,
+        } = req.body;
+
+        await db.run(
+          `INSERT INTO create_task (
+              project, issue_type, original_estimate, remaining_estimate, severity, priority,
+              affects_versions, fix_versions, build, assignee
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          [
             project,
             issueType,
             originalEstimate,
@@ -26,57 +46,36 @@ export default async function create(req, res) {
             affectsVersions,
             fixVersions,
             build,
-            assignee
-          } = req.body;
-          
-          await db.run(
-            `INSERT INTO create_task (
-              project, issue_type, original_estimate, remaining_estimate, severity, priority,
-              affects_versions, fix_versions, build, assignee
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [
-              project,
-              issueType,
-              originalEstimate,
-              remainingEstimate,
-              severity,
-              priority,
-              affectsVersions,
-              fixVersions,
-              build,
-              assignee
-            ]
-          );
-          
-          res.status(200).json({
-            message: "Задача успешно создана",
-            data: {
-              project,
-              issueType,
-              originalEstimate,
-              remainingEstimate,
-              severity,
-              priority,
-              affectsVersions,
-              fixVersions,
-              build,
-              assignee
-            }
-          });
-        } else if (req.method === 'DELETE') {
-          // Здесь обрабатываем DELETE-запрос
-          await db.run("DELETE FROM create_task WHERE id = (SELECT MAX(id) FROM create_task)");
-          res.status(200).json({ message: "Запись успешно удалена" });
-        }
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Ошибка сервера" });
-      } finally {
-        await db.close(); // Важно закрыть соединение с базой данных
+            assignee,
+          ],
+        );
+
+        return res.status(200).json({
+          message: 'Задача успешно создана',
+          data: {
+            project,
+            issueType,
+            originalEstimate,
+            remainingEstimate,
+            severity,
+            priority,
+            affectsVersions,
+            fixVersions,
+            build,
+            assignee,
+          },
+        });
       }
-    });
-  } else {
-    await db.close();
-    res.status(405).json({ message: 'Method Not Allowed' });
-  }
+
+      await db.run('DELETE FROM create_task WHERE id = (SELECT MAX(id) FROM create_task)');
+      return res.status(200).json({ message: 'Запись успешно удалена' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Ошибка сервера' });
+    } finally {
+      if (db) {
+        await db.close();
+      }
+    }
+  });
 }

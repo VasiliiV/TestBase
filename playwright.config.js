@@ -5,6 +5,8 @@ import { defineConfig, devices } from '@playwright/test';
 // defineConfig — удобный хелпер для автокомплита и валидации конфига
 // devices — набор готовых профилей браузеров и экранов
 
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
+
 export default defineConfig({
   // Папка, где лежат e2e-тесты Playwright
   testDir: './tests',
@@ -42,7 +44,7 @@ export default defineConfig({
   use: {
     // Базовый URL приложения
     // Можно писать page.goto('/') вместо полного адреса
-    baseURL: 'http://localhost:3000',
+    baseURL,
 
     // Собираем trace только если тест упал и пошёл на ретрай
     // Очень помогает разбирать падения
@@ -55,17 +57,11 @@ export default defineConfig({
 
   // Набор браузеров, в которых будут запускаться тесты
   projects: [
-    // {
-    //   // Основной браузер для автотестов
-    //   // Быстрый и самый стабильный
-    //   name: 'chromium',
-    //   use: { ...devices['Desktop Chrome'] },
-    // },
-
     {
-      // Реальный Google Chrome, ближе к пользователям
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+      // Основной браузер для автотестов
+      // Используем встроенный Chromium, чтобы не тянуть внешний Chrome
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
   ],
 
@@ -75,7 +71,7 @@ export default defineConfig({
   /*
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: baseURL,
     reuseExistingServer: !process.env.CI,
   },
   */

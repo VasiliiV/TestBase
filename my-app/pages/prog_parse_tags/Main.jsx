@@ -1,15 +1,17 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router';
 
 
 function Main() {
+            const [status, setStatus] = useState({ type: '', message: '' });
             function handleParseButtonClick() {
-              const token = localStorage.getItem('token'); 
-            
+              setStatus({ type: '', message: '' });
+              const token = localStorage.getItem('token');
+
               // Проверяем, есть ли токен перед отправкой запроса
               if (!token) {
-                console.log('Токен не найден, пожалуйста, авторизуйтесь.');
+                setStatus({ type: 'error', message: 'Токен не найден, пожалуйста, авторизуйтесь.' });
                 return; // Остановим выполнение функции, если токен отсутствует
               }
             
@@ -25,19 +27,21 @@ function Main() {
                   'Authorization': `Bearer ${token}` // Добавляем токен в заголовок
                 }
               })
-              .then(response => {
-                if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json(); // Обработка ответа здесь
-              })
-              .then(data => {
-                console.log(data);
-              })
-              .catch(error => {
-                // Обработка ошибки здесь
-                console.error('Ошибка при запросе:', error);
-              });
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+                  return response.json(); // Обработка ответа здесь
+                })
+                .then(data => {
+                  console.log(data);
+                  setStatus({ type: 'success', message: 'Данные успешно сохранены.' });
+                })
+                .catch(error => {
+                  // Обработка ошибки здесь
+                  console.error('Ошибка при запросе:', error);
+                  setStatus({ type: 'error', message: 'Ошибка при отправке данных.' });
+                });
             }
   
   
@@ -103,11 +107,16 @@ function Main() {
                                 <input type="checkbox" name="" id="" onChange={handleGoogleCheckboxChange} />
                             </div>
                         </div>
-                        <div id="search">
-                            <button onClick={handleParseButtonClick}>Сохранить</button>
-                        </div>
-                    </div>
-                </div>
+                          <div id="search">
+                              <button onClick={handleParseButtonClick}>Сохранить</button>
+                              {status.message && (
+                                <div style={{ marginTop: '10px', color: status.type === 'error' ? 'red' : 'green' }} aria-live="polite">
+                                  {status.message}
+                                </div>
+                              )}
+                          </div>
+                      </div>
+                  </div>
             </div>
         </div>
     );
