@@ -1,4 +1,4 @@
-# progaBaseTest v.0.1.15
+# progaBaseTest v.0.1.16
 
 Автор: Vasiliy Volgin
 
@@ -79,12 +79,15 @@ docker compose up --build
   - `tests/register.spec.js` — эндпоинты `/api/click`, `/api/create`, `/api/tasks`, `/api/bags`
 - Java API: `testBaseAutoTest/src`
 
-## Обновления (срез текущей работы)
-- Переезд API на PostgreSQL с автоматическим созданием таблиц и индексом уникальности пользователей.
-- Миграция таблиц: `create_task` → `task`, добавлена `bags`, перенос legacy-данных.
-- Новые API ручки `/api/tasks` и `/api/bags` (GET/POST/DELETE), защита через JWT.
-- Добавлены Playwright API-тесты, покрывающие все текущие эндпоинты приложения.
-- Обучающие окна для практики DevTools/БД и заданий для junior QA.
-- Экзамен расширен на 15 вопросов, отдельная страница `/exam`.
-
-Предыдущие обновления из README удалены, чтобы не переполнять файл информацией.
+## История версий
+### v0.1.16
+- Переезд API на PostgreSQL с авто-миграциями, созданием таблиц/индексов и новыми ручками `/api/tasks` и `/api/bags`.
+- Улучшена конфигурация подключения к БД, диагностика ошибок и документация по PostgreSQL/Railway.
+- Улучшения деплоя и контейнеризации: Railway config и Dockerfile, сборка Next.js из `my-app`, npm ci/omit dev, корректные host/port, graceful shutdown, Procfile.
+- Обновлён интерфейс и учебные задания, расширен экзамен, добавлены тесты.
+### v0.1.15
+- JWT-аутентификация на API, хранение токена на фронте.
+- UI/API автотесты на Playwright + Allure, разделение unit и e2e/API тестов.
+- Dockerfiles и docker-compose для приложения, моков и автотестов.
+### v0.1.14
+- Добавлены Dockerfiles для сборки контейнеров приложения.
