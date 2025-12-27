@@ -1,16 +1,23 @@
-import { Pool } from 'pg';
+const { Pool } = require('pg');
 
 const buildConnectionConfig = () => {
   const directUrl =
-    process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.PGURL;
+    process.env.DATABASE_URL ||
+    process.env.DATABASE_PUBLIC_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.PGURL;
 
   if (directUrl) {
     return { connectionString: directUrl };
   }
 
   const pg = {
-    host: process.env.PGHOST || process.env.POSTGRES_HOST,
-    port: process.env.PGPORT || process.env.POSTGRES_PORT || '5432',
+    host:
+      process.env.PGHOST ||
+      process.env.POSTGRES_HOST ||
+      process.env.RAILWAY_PRIVATE_DOMAIN ||
+      process.env.RAILWAY_TCP_PROXY_DOMAIN,
+    port: process.env.PGPORT || process.env.POSTGRES_PORT || process.env.RAILWAY_TCP_PROXY_PORT || '5432',
     user: process.env.PGUSER || process.env.POSTGRES_USER,
     password: process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD,
     database: process.env.PGDATABASE || process.env.POSTGRES_DB,
@@ -18,27 +25,60 @@ const buildConnectionConfig = () => {
 
   if (pg.host && pg.user && pg.password && pg.database) {
     const encodedPassword = encodeURIComponent(pg.password);
+    const encodedUser = encodeURIComponent(pg.user);
     return {
-      connectionString: `postgresql://${pg.user}:${encodedPassword}@${pg.host}:${pg.port}/${pg.database}`,
+      connectionString: `postgresql://${encodedUser}:${encodedPassword}@${pg.host}:${pg.port}/${pg.database}`,
     };
   }
 
-  return null;
+  return {
+    missing: {
+      host: pg.host,
+      port: pg.port,
+      user: pg.user,
+      database: pg.database,
+    },
+  };
 };
-
-const baseConfig = buildConnectionConfig();
 
 const ssl =
   process.env.PGSSLMODE === 'disable'
     ? false
     : { rejectUnauthorized: false };
 
-const pool = baseConfig
-  ? new Pool({
-      ...baseConfig,
-      ssl: process.env.NODE_ENV === 'production' ? ssl : undefined,
-    })
-  : null;
+let pool = null;
+
+const buildMissingEnvMessage = (missing) => {
+  const details = [
+    `host=${missing.host ?? 'not set'}`,
+    `port=${missing.port ?? 'not set'}`,
+    `user=${missing.user ?? 'not set'}`,
+    `database=${missing.database ?? 'not set'}`,
+  ].join(', ');
+
+  return [
+    'Database connection is not configured.',
+    'Set DATABASE_URL (or DATABASE_PUBLIC_URL / POSTGRES_URL / PGURL) or PGHOST/PGPORT/PGUSER/PGPASSWORD/PGDATABASE (or POSTGRES_*) environment variables.',
+    `Current values: ${details}`,
+  ].join(' ');
+};
+
+const getPool = () => {
+  if (pool) return pool;
+
+  const config = buildConnectionConfig();
+
+  if (!config.connectionString) {
+    throw new Error(buildMissingEnvMessage(config.missing || {}));
+  }
+
+  pool = new Pool({
+    ...config,
+    ssl: process.env.NODE_ENV === 'production' ? ssl : undefined,
+  });
+
+  return pool;
+};
 
 const TASK_COLUMNS = {
   title: 'TEXT',
@@ -137,16 +177,14 @@ const ensureTables = async (db) => {
 
 const assertPool = () => {
   if (!pool) {
-    throw new Error(
-      'Database connection is not configured. Set DATABASE_URL or PGHOST/PGUSER/PGPASSWORD/PGDATABASE environment variables.'
-    );
+    getPool();
   }
 };
 
 let ensurePromise = null;
 
 const ensureSchema = async () => {
-  const client = await pool.connect();
+  const client = await getPool().connect();
   try {
     await ensureTables(client);
   } finally {
@@ -154,7 +192,7 @@ const ensureSchema = async () => {
   }
 };
 
-export const openDb = async () => {
+const openDb = async () => {
   assertPool();
   if (!ensurePromise) {
     ensurePromise = ensureSchema().catch((error) => {
@@ -164,9 +202,9 @@ export const openDb = async () => {
     });
   }
 
-  const client = await pool.connect();
+  const client = await getPool().connect();
   await ensurePromise;
   return wrapClient(client);
 };
 
-export { ensureTables };
+module.exports = { openDb, ensureTables, getPool };

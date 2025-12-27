@@ -36,3 +36,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Railway PostgreSQL notes
+
+- Configure your database connection with `DATABASE_URL` (or `DATABASE_PUBLIC_URL`/`POSTGRES_URL`) or the `PGHOST`/`PGPORT`/`PGUSER`/`PGPASSWORD`/`PGDATABASE` variables that Railway exposes for managed PostgreSQL services.
+- On first request the app will run migrations automatically; if any of the variables above are missing, startup will fail with a message listing the detected values.
+- Example log from a healthy Railway PostgreSQL service (helpful for sanity checks):
+
+```
+2025-12-27 17:34:24.434 UTC [3] LOG:  starting PostgreSQL 17.7 (Debian 17.7-3.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+2025-12-27 17:34:24.434 UTC [3] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2025-12-27 17:34:24.434 UTC [3] LOG:  listening on IPv6 address "::", port 5432
+2025-12-27 17:34:24.457 UTC [3] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-12-27 17:34:24.466 UTC [78] LOG:  database system was shut down at 2025-12-27 17:34:24 UTC
+2025-12-27 17:34:24.474 UTC [3] LOG:  database system is ready to accept connections
+2025-12-27 17:39:24.565 UTC [76] LOG:  checkpoint starting: time
+2025-12-27 17:39:28.994 UTC [76] LOG:  checkpoint complete: wrote 47 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.415 s, sync=0.005 s, total=4.430 s; sync files=12, longest=0.004 s, average=0.001 s; distance=270 kB, estimate=270 kB; lsn=0/19591D8, redo lsn=0/1959180
+```
