@@ -52,7 +52,7 @@ export default async function create(req, res) {
         );
 
         return res.status(200).json({
-          message: 'Задача успешно создана',
+          message: 'Task created successfully',
           data: {
             project,
             issueType,
@@ -75,10 +75,10 @@ export default async function create(req, res) {
          WHERE id = (SELECT id FROM bags WHERE user_name = ? ORDER BY id DESC LIMIT 1)`,
         userName
       );
-      return res.status(200).json({ message: 'Запись успешно удалена' });
+      return res.status(200).json({ message: 'Record deleted successfully' });
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: 'Ошибка сервера' });
+      return res.status(500).json({ message: 'Server error' });
     } finally {
       if (db) {
         await db.close();

@@ -6,32 +6,34 @@ function NameTaskModal({ onClose }) {
             <div className="training-modal" onClick={(event) => event.stopPropagation()}>
                 <div className="training-modal__header">
                     <div>
-                        <span className="pill">Практика</span>
-                        <h2>Проверка имени и базы данных</h2>
+                        <span className="pill">Practice</span>
+                        <h2>Name field and database check</h2>
                     </div>
                     <button className="btn btn-ghost" type="button" onClick={onClose}>
-                        Закрыть
+                        Close
                     </button>
                 </div>
                 <div className="training-modal__body">
                     <p>
-                        Цель — потренироваться читать запросы в DevTools и сверять данные с БД.
+                        Goal — practice reading requests in DevTools and comparing data with the database. Treat it as
+                        a mini traceability lab between UI, API, and storage.
                     </p>
                     <ol>
-                        <li>В блоке “Тестовые поля” активируй чекбокс “Имя” и введи значение.</li>
-                        <li>Нажми “Сохранить” и в DevTools → Network проверь POST `/api/click`.</li>
-                        <li>Нажми “Показать имя” в профиле — значение должно отобразиться.</li>
-                        <li>Проверь запись в базе данных `sqlite/parsetags.db` в таблице `tags`.</li>
+                        <li>In the “Test fields” block, enable the “Name” checkbox and enter a value with unicode and emoji.</li>
+                        <li>Click “Save” and in DevTools → Network inspect the POST `/api/click` (headers, payload, status).</li>
+                        <li>Click “Show name” in the profile — the value should appear without trimming or encoding issues.</li>
+                        <li>Check the record in `sqlite/parsetags.db` in the `tags` table and confirm created_at is stored.</li>
+                        <li>Repeat with an empty string and long string (256+ chars) to see how validation behaves end-to-end.</li>
                     </ol>
                     <div className="training-modal__hint">
-                        Пример запроса к базе:
+                        Example database query:
                         <pre>
-                            <code>SELECT name, age FROM tags ORDER BY id DESC LIMIT 1;</code>
+                            <code>SELECT name, age, created_at FROM tags ORDER BY id DESC LIMIT 1;</code>
                         </pre>
                     </div>
                     <p>
-                        Если заметишь проблемы в UI/UX — смело описывай и заводи баг-репорт через
-                        “Новый баг-репорт”.
+                        If you notice UI/UX issues, describe them and create a bug report via “New bug report”. Capture
+                        all evidence (request, DB row, UI state) in a single note.
                     </p>
                 </div>
             </div>

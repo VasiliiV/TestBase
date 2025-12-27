@@ -6,10 +6,10 @@ import SectionImage from '../pages/prog_parse_tags/blog_for_image/SectionImage';
 // Mock useRouter
 jest.mock('next/router', () => ({
     useRouter: jest.fn(),
-  }));
+}));
 
-test('renders "Тут будет твоё имя" text', () => {
+test('renders "Your name will appear here" text', () => {
     render(<SectionImage />);
-    const textElement = screen.getByText(/Тут будет твоё имя/i);
+    const textElement = screen.getByText(/Your name will appear here/i);
     expect(textElement).toBeInTheDocument();
-  });
+});

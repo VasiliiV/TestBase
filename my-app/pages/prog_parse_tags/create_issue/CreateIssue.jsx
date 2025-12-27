@@ -48,7 +48,7 @@ function CreateIssue({ onClose, onSave }) {
         try {
           const token = localStorage.getItem("token");
           if (!token) {
-            console.log("Токен не найден, пожалуйста, авторизуйтесь.");
+            console.log("Token not found. Please sign in.");
             return;
           }
 
@@ -69,7 +69,7 @@ function CreateIssue({ onClose, onSave }) {
             onSave({
               id: data.data?.id,
               createdAt: data.data?.created_at,
-              summary: data.data?.summary || formData.summary || "Без заголовка",
+              summary: data.data?.summary || formData.summary || "Untitled",
               issueType: data.data?.issue_type || formData.issueType || "Bug",
               severity: data.data?.severity || formData.severity || "Medium",
               priority: data.data?.priority || formData.priority || "Medium",
@@ -195,7 +195,7 @@ function CreateIssue({ onClose, onSave }) {
                                 <textarea name="description" cols="30" rows="10" maxLength={255} value={formData.description} onChange={handleChange}></textarea>
                             </div>
                             <div className="content_estimate">
-                                <h3>Шаги для воспроизведения</h3>
+                                <h3>Steps to reproduce</h3>
                                 <textarea name="stepsToReproduce" cols="30" rows="10" maxLength={255} value={formData.stepsToReproduce} onChange={handleChange}></textarea>
                             </div>
                             <div className="content_estimate">
@@ -207,7 +207,7 @@ function CreateIssue({ onClose, onSave }) {
                                 <input type="text" name="labels" value={formData.labels} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
-                                <h3>Клиент</h3>
+                                <h3>Client</h3>
                                 <input type="text" name="client" value={formData.client} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
@@ -239,7 +239,7 @@ function CreateIssue({ onClose, onSave }) {
                                 <input type="text" name="plannedFinish" value={formData.plannedFinish} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">
-                                <h3>Контакты клиента</h3>
+                                <h3>Customer contacts</h3>
                                 <input type="text" name="customerContacts" value={formData.customerContacts} onChange={handleChange}/>
                             </div>
                             <div className="content_estimate">

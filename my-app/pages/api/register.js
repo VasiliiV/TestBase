@@ -19,7 +19,7 @@ export default async function register(req, res) {
                 await db.close();
                 return res.status(409).json({
                     success: false,
-                    message: "Пользователь с таким именем уже существует"
+                    message: "A user with this name already exists"
                 });
             }
 
@@ -28,7 +28,6 @@ export default async function register(req, res) {
 
             const { accessTokenSecret, refreshTokenSecret } = getJwtSecrets();
 
-            // Создание токенов
             const accessToken = jwt.sign(
                 { name: name },
                 accessTokenSecret,
@@ -44,7 +43,7 @@ export default async function register(req, res) {
 
             return res.status(200).json({
                 success: true,
-                message: "Успешная регистрация",
+                message: "Registration successful",
                 accessToken,
                 refreshToken
             });
@@ -52,13 +51,13 @@ export default async function register(req, res) {
             console.error(error);
             return res.status(500).json({
                 success: false,
-                message: "Произошла внутренняя ошибка сервера"
+                message: "Internal server error"
             });
         }
     } else {
         return res.status(405).json({
             success: false,
-            message: "Метод не поддерживается"
+            message: "Method not allowed"
         });
     }
 }

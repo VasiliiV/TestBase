@@ -34,7 +34,7 @@ function CreateTestCase({ onClose, onSave }) {
         try {
             const token = localStorage.getItem("token");
             if (!token) {
-                console.log("Токен не найден, пожалуйста, авторизуйтесь.");
+                console.log("Token not found. Please sign in.");
                 return;
             }
 
@@ -56,7 +56,7 @@ function CreateTestCase({ onClose, onSave }) {
                 onSave({
                     id: data.data?.id,
                     createdAt: data.data?.created_at,
-                    title: data.data?.title || formData.title || "Без названия",
+                    title: data.data?.title || formData.title || "Untitled",
                     tags: data.data?.tags || formData.tags,
                     description: data.data?.description || formData.description,
                 });
@@ -96,7 +96,7 @@ function CreateTestCase({ onClose, onSave }) {
                                                 name="title"
                                                 value={formData.title}
                                                 onChange={handleChange}
-                                                placeholder="Короткий заголовок тест-кейса"
+                                                placeholder="Short test case title"
                                             />
                                         </div>
                                     </div>

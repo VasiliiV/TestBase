@@ -8,12 +8,12 @@ export default function authenticateToken(req, res, next) {
   const { accessTokenSecret } = getJwtSecrets();
 
   if (token == null) {
-    return res.status(401).json({ message: 'Токен не предоставлен' });
+    return res.status(401).json({ message: 'Token not provided' });
   }
 
   jwt.verify(token, accessTokenSecret, (err, user) => {
     if (err) {
-      return res.status(403).json({ message: 'Токен недействителен или истек' });
+      return res.status(403).json({ message: 'Token is invalid or expired' });
     }
     req.user = user;
     next();

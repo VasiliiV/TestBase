@@ -1,18 +1,18 @@
 * {
-    box-sizing: border-box; /* Улучшение обработки размеров и отступов */
+    box-sizing: border-box; /* Improve sizing and spacing handling */
 }
 
 .dialog-for-task {
-    border-radius: 12px; /* Увеличенное скругление углов */
+    border-radius: 12px; /* Larger corner radius */
     border: 1px solid var(--border);
     width: min(820px, 92vw);
     height: auto;
     max-height: 90vh;
     background-color: #fff;
-    padding: 20px; /* Увеличенные отступы */
+    padding: 20px; /* Increased padding */
     display: flex;
     flex-direction: column;
-    margin: 15px auto; /* Центрирование диалогового окна */
+    margin: 15px auto; /* Center dialog window */
     overflow: hidden;
 }
 
@@ -23,7 +23,7 @@
 .dialog-heading__basic {
     background-color: #fff;
     position: sticky;
-    padding: 10px 0; /* Вертикальные отступы */
+    padding: 10px 0; /* Vertical padding */
     border-bottom: 1px solid var(--border);
 }
 
@@ -31,9 +31,9 @@
     width: 24px;
     height: 24px;
     padding: 0;
-    position: absolute; /* Абсолютное позиционирование */
+    position: absolute; /* Absolute positioning */
     top: 20px;
-    right: 20px; /* Правое позиционирование вместо левого */
+    right: 20px; /* Right positioning */
     border-radius: 999px;
     border: 1px solid var(--border);
     background-color: #fff;
@@ -55,7 +55,7 @@
 }
 
 .form-body {
-    max-height: 739px; /* Исправлена опечатка, оставлена только одна строка max-height */
+    max-height: 739px; /* Single max-height declaration */
 }
 
 .group__form-body {
@@ -150,7 +150,7 @@
     border-radius: 999px;
     cursor: pointer;
     padding: 10px 20px;
-    transition: background-color 0.3s ease; /* Анимация */
+    transition: background-color 0.3s ease; /* Animation */
 }
 
 .button_create:hover {
@@ -164,7 +164,7 @@
     cursor: pointer;
     background-color: #ffffff;
     padding: 10px 20px;
-    transition: background-color 0.3s ease; /* Анимация */
+    transition: background-color 0.3s ease; /* Animation */
 }
 
 .button_cancel:hover {

@@ -9,10 +9,9 @@ function Main() {
               setStatus({ type: '', message: '' });
               const token = localStorage.getItem('token');
 
-              // Проверяем, есть ли токен перед отправкой запроса
               if (!token) {
-                setStatus({ type: 'error', message: 'Токен не найден, пожалуйста, авторизуйтесь.' });
-                return; // Остановим выполнение функции, если токен отсутствует
+                setStatus({ type: 'error', message: 'Token not found. Please sign in.' });
+                return;
               }
             
               const data = {
@@ -24,23 +23,23 @@ function Main() {
                 body: JSON.stringify(data),
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}` // Добавляем токен в заголовок
+                  'Authorization': `Bearer ${token}` // Add token to header
                 }
               })
                 .then(response => {
                   if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                   }
-                  return response.json(); // Обработка ответа здесь
+                  return response.json(); // Handle response here
                 })
                 .then(data => {
                   console.log(data);
-                  setStatus({ type: 'success', message: 'Данные успешно сохранены.' });
+                  setStatus({ type: 'success', message: 'Data saved successfully.' });
                 })
                 .catch(error => {
-                  // Обработка ошибки здесь
-                  console.error('Ошибка при запросе:', error);
-                  setStatus({ type: 'error', message: 'Ошибка при отправке данных.' });
+                  // Handle error here
+                  console.error('Request error:', error);
+                  setStatus({ type: 'error', message: 'Error while sending data.' });
                 });
             }
   
@@ -69,23 +68,23 @@ function Main() {
             <div className="dashboard-hero__top">
                 <div>
                     <span className="pill">TestBase QA Lab</span>
-                    <h1>Тренировочная площадка для тестировщика</h1>
+                    <h1>QA training ground</h1>
                     <p className="dashboard-hero__subtitle">
-                        Проверь формы, фиксируй баги, оформляй тест-кейсы — всё в одном месте.
+                        Validate forms, log bugs, and write test cases — all in one place.
                     </p>
                 </div>
-                <button className="btn btn-ghost" onClick={exitClick}>Выйти</button>
+                <button className="btn btn-ghost" onClick={exitClick}>Sign out</button>
             </div>
             <div className="dashboard-grid">
                 <div className="dashboard-card">
-                    <h3>Тестовые поля</h3>
-                    <p>Включай чекбоксы и проверяй, как ведут себя поля ввода.</p>
+                    <h3>Test fields</h3>
+                    <p>Enable checkboxes and verify how the inputs behave.</p>
                     <div className="field-row">
                         <div className="field-block">
-                            <label>Имя</label>
+                            <label>Name</label>
                             <input
                                 type="text"
-                                placeholder="Введите имя"
+                                placeholder="Enter a name"
                                 disabled={!isNameChecked}
                                 value={nameInputValue}
                                 onChange={(event) => setNameInputValue(event.target.value)}
@@ -93,15 +92,15 @@ function Main() {
                         </div>
                         <label className="toggle">
                             <input type="checkbox" onChange={handleYandexCheckboxChange} />
-                            <span>Активировать</span>
+                            <span>Activate</span>
                         </label>
                     </div>
                     <div className="field-row">
                         <div className="field-block">
-                            <label>Возраст</label>
+                            <label>Age</label>
                             <input
                                 type="text"
-                                placeholder="Введите возраст"
+                                placeholder="Enter an age"
                                 disabled={!isAgeChecked}
                                 value={ageInputValue}
                                 onChange={(event) => setAgeInputValue(event.target.value)}
@@ -109,11 +108,11 @@ function Main() {
                         </div>
                         <label className="toggle">
                             <input type="checkbox" onChange={handleGoogleCheckboxChange} />
-                            <span>Активировать</span>
+                            <span>Activate</span>
                         </label>
                     </div>
                     <div className="dashboard-actions">
-                        <button className="btn btn-primary" onClick={handleParseButtonClick}>Сохранить</button>
+                        <button className="btn btn-primary" onClick={handleParseButtonClick}>Save</button>
                         {status.message && (
                             <div className={`status-pill ${status.type === 'error' ? 'status-pill--error' : 'status-pill--success'}`} aria-live="polite">
                                 {status.message}
@@ -122,11 +121,11 @@ function Main() {
                     </div>
                 </div>
                 <div className="dashboard-card dashboard-guide">
-                    <h3>Как использовать стенд</h3>
+                    <h3>How to use the sandbox</h3>
                     <ol>
-                        <li>Сгенерируй данные, сохрани их и проверь ответ API.</li>
-                        <li>Создай тест-кейс или баг-репорт через панель справа.</li>
-                        <li>Сравни ожидания с фактом — зафиксируй дефекты.</li>
+                        <li>Generate data, save it, and verify the API response.</li>
+                        <li>Create a test case or bug report with the panel on the right.</li>
+                        <li>Compare expected vs. actual results and log defects.</li>
                     </ol>
                 </div>
             </div>

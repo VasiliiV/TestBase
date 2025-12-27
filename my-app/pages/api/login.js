@@ -7,7 +7,7 @@ import { getJwtSecrets } from '../../lib/jwtSecrets';
 export default async function login(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
-    return res.status(405).json({ success: false, message: 'Метод не поддерживается' });
+    return res.status(405).json({ success: false, message: 'Method not allowed' });
   }
 
   const { accessTokenSecret } = getJwtSecrets();
@@ -33,14 +33,14 @@ export default async function login(req, res) {
 
         return res.status(200).json({
           success: true,
-          message: 'Успешная авторизация',
+          message: 'Login successful',
           accessToken,
         });
       }
 
       return res.status(401).json({
         success: false,
-        message: 'Имя пользователя или пароль не верны',
+        message: 'Invalid username or password',
       });
     }
 
@@ -55,14 +55,14 @@ export default async function login(req, res) {
 
     return res.status(201).json({
       success: true,
-      message: 'Пользователь зарегистрирован и авторизован',
+      message: 'User registered and logged in',
       accessToken,
     });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
       success: false,
-      message: 'Ошибка сервера',
+      message: 'Server error',
     });
   } finally {
     if (db) {

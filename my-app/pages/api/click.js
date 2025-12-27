@@ -25,14 +25,14 @@ export default function click(req, res) {
 
       if (req.method === 'DELETE') {
         await db.run('DELETE FROM tags WHERE id = (SELECT MAX(id) FROM tags)');
-        return res.status(200).json({ message: 'Запись успешно удалена' });
+        return res.status(200).json({ message: 'Record deleted successfully' });
       }
 
       const lastRow = await db.get('SELECT name, age FROM tags ORDER BY id DESC LIMIT 1');
       return res.status(200).json(lastRow);
     } catch (err) {
       console.error(err);
-      return res.status(500).json({ message: 'Ошибка сервера' });
+      return res.status(500).json({ message: 'Server error' });
     } finally {
       if (db) {
         await db.close();
