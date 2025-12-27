@@ -14,6 +14,9 @@ FROM node:18-alpine
 
 WORKDIR /app
 
+# гарантируем запуск в продакшн-режиме
+ENV NODE_ENV=production
+
 # устанавливаем только продакшн-зависимости, чтобы избежать предупреждений npm о флаге production
 COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
