@@ -56,3 +56,18 @@ const server = http.createServer((req, res) => {
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+// Ensure graceful shutdown so orchestrators that send SIGTERM don't leave npm reporting errors
+const shutdown = signal => {
+  console.log(`\nReceived ${signal}. Shutting down gracefully...`);
+  server.close(err => {
+    if (err) {
+      console.error('Error during server shutdown:', err);
+      process.exit(1);
+    }
+    process.exit(0);
+  });
+};
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
