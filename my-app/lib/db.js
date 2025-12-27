@@ -116,9 +116,29 @@ const assertPool = () => {
   }
 };
 
+let ensurePromise = null;
+
+const ensureSchema = async () => {
+  const client = await pool.connect();
+  try {
+    await ensureTables(client);
+  } finally {
+    client.release();
+  }
+};
+
 export const openDb = async () => {
   assertPool();
-  const client = await pool.connect();
+  if (!ensurePromise) {
+    ensurePromise = ensureSchema().catch((error) => {
+      // Reset so a transient connection issue can be retried on the next call
+      ensurePromise = null;
+      throw error;
+    });
+  }
+
+const client = await pool.connect();
+  await ensurePromise;
   return wrapClient(client);
 };
 
