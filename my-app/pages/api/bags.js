@@ -23,9 +23,9 @@ export default async function bags(req, res) {
         const rows = await db.all(
           `SELECT id, summary, issue_type, severity, priority, created_at
            FROM bags
-           WHERE user_name = ?
+           WHERE user_name = $1
            ORDER BY id DESC`,
-          userName
+          [userName]
         );
         return res.status(200).json({ data: rows });
       }
@@ -67,7 +67,7 @@ export default async function bags(req, res) {
             affects_versions, fix_versions, build, assignee, component, summary, description,
             steps_to_reproduce, attachment, labels, client, linked_issues, issue, qa, environment,
             epic_link, planned_start, planned_finish, customer_contacts, sprint, created_at, user_name
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28) RETURNING id`,
           [
             project || null,
             issueType || null,
@@ -100,10 +100,12 @@ export default async function bags(req, res) {
           ]
         );
 
+        const insertedId = result.lastID ?? result.rows?.[0]?.id ?? null;
+
         return res.status(201).json({
           message: 'Bug report created',
           data: {
-            id: result.lastID,
+            id: insertedId,
             summary: summary || 'Untitled',
             issue_type: issueType || 'Bug',
             severity: severity || 'Medium',
@@ -119,7 +121,7 @@ export default async function bags(req, res) {
       }
 
       const result = await db.run(
-        'DELETE FROM bags WHERE id = ? AND user_name = ?',
+        'DELETE FROM bags WHERE id = $1 AND user_name = $2',
         [id, userName]
       );
       return res.status(200).json({ message: 'Record deleted', changes: result.changes });
