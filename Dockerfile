@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies for the Next.js app located in /my-app
 COPY my-app/package*.json ./
-RUN npm ci
+RUN npm install
 
 # Copy the full app source and build for production
 COPY my-app/ .
@@ -19,7 +19,7 @@ ENV PORT=8080
 
 # Install only production dependencies to keep the runtime image slim
 COPY --from=builder /app/package*.json ./
-RUN npm ci --omit=dev
+RUN npm install --omit=dev
 
 # Copy the built Next.js assets and required config/static files
 COPY --from=builder /app/.next ./.next

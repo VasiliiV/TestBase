@@ -34,7 +34,7 @@ export default async function create(req, res) {
           `INSERT INTO bags (
               project, issue_type, original_estimate, remaining_estimate, severity, priority,
               affects_versions, fix_versions, build, assignee, created_at, user_name
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
           [
             project,
             issueType,
@@ -72,8 +72,8 @@ export default async function create(req, res) {
       const userName = req.user?.name;
       await db.run(
         `DELETE FROM bags
-         WHERE id = (SELECT id FROM bags WHERE user_name = ? ORDER BY id DESC LIMIT 1)`,
-        userName
+         WHERE id = (SELECT id FROM bags WHERE user_name = $1 ORDER BY id DESC LIMIT 1)`,
+        [userName]
       );
       return res.status(200).json({ message: 'Record deleted successfully' });
     } catch (error) {

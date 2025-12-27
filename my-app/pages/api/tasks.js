@@ -23,9 +23,9 @@ export default async function tasks(req, res) {
         const rows = await db.all(
           `SELECT id, title, description, tags, created_at
            FROM task
-           WHERE user_name = ?
+           WHERE user_name = $1
            ORDER BY id DESC`,
-          userName
+          [userName]
         );
         return res.status(200).json({ data: rows });
       }
@@ -50,7 +50,7 @@ export default async function tasks(req, res) {
           `INSERT INTO task (
             title, description, scenario, comments, tags, issues_links, test_keys,
             members, fields, relations, mutes, created_at, user_name
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING id`,
           [
             title || null,
             description || null,
@@ -68,10 +68,12 @@ export default async function tasks(req, res) {
           ]
         );
 
+        const insertedId = result.lastID ?? result.rows?.[0]?.id ?? null;
+
         return res.status(201).json({
           message: 'Test case created',
           data: {
-            id: result.lastID,
+            id: insertedId,
             title: title || 'Untitled',
             description: description || null,
             tags: tags || null,
@@ -86,7 +88,7 @@ export default async function tasks(req, res) {
       }
 
       const result = await db.run(
-        'DELETE FROM task WHERE id = ? AND user_name = ?',
+        'DELETE FROM task WHERE id = $1 AND user_name = $2',
         [id, userName]
       );
       return res.status(200).json({ message: 'Record deleted', changes: result.changes });
