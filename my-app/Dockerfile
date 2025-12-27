@@ -14,9 +14,8 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/package-lock.json ./package-lock.json
 # устанавливаем только продакшн-зависимости, чтобы избежать предупреждений npm о флаге production
+COPY --from=builder /app/package*.json ./
 RUN npm ci --omit=dev
 
 # используем заранее собранные артефакты вместо повторной сборки на этапе запуска
