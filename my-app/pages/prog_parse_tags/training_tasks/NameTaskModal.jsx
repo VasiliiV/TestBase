@@ -22,7 +22,7 @@ function NameTaskModal({ onClose }) {
                         <li>In the “Test fields” block, enable the “Name” checkbox and enter a value with unicode and emoji.</li>
                         <li>Click “Save” and in DevTools → Network inspect the POST `/api/click` (headers, payload, status).</li>
                         <li>Click “Show name” in the profile — the value should appear without trimming or encoding issues.</li>
-                        <li>Check the record in `sqlite/parsetags.db` in the `tags` table and confirm created_at is stored.</li>
+                        <li>Check the record in the PostgreSQL `tags` table (via `psql` or any client) and confirm `created_at` is stored.</li>
                         <li>Repeat with an empty string and long string (256+ chars) to see how validation behaves end-to-end.</li>
                     </ol>
                     <div className="training-modal__hint">

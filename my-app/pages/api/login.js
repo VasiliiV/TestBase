@@ -1,8 +1,7 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { getJwtSecrets } from '../../lib/jwtSecrets';
+import { ensureTables, openDb } from '../../lib/db';
 
 export default async function login(req, res) {
   if (req.method !== 'POST') {
@@ -15,12 +14,10 @@ export default async function login(req, res) {
   let db;
   try {
     const { name, password } = req.body;
-    db = await open({
-      filename: './sqlite/parsetags.db',
-      driver: sqlite3.Database,
-    });
+    db = await openDb();
+    await ensureTables(db);
 
-    const user = await db.get('SELECT * FROM user WHERE name = ?', name);
+    const user = await db.get('SELECT * FROM "user" WHERE name = $1', [name]);
 
     if (user) {
       const match = await bcrypt.compare(password, user.password);
@@ -45,7 +42,7 @@ export default async function login(req, res) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.run('INSERT INTO user (name, password) VALUES (?, ?)', name, hashedPassword);
+    await db.run('INSERT INTO "user" (name, password) VALUES ($1, $2)', [name, hashedPassword]);
 
     const accessToken = jwt.sign(
       { name },
