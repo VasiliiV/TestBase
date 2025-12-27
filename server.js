@@ -1,8 +1,7 @@
 const http = require('http');
 
-const hostname = '0.0.0.0';
-const port = process.env.PORT || 8080;
-const port = process.env.PORT || 4000;
+const HOST = '0.0.0.0';
+const PORT = Number(process.env.PORT) || 8080;
 
 const notes = [];
 
@@ -54,8 +53,8 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(PORT, HOST, () => {
+  console.log(`Server running at http://${HOST}:${PORT}/`);
 });
 
 // Ensure graceful shutdown so orchestrators that send SIGTERM don't leave npm reporting errors
