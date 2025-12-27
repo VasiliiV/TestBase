@@ -137,7 +137,7 @@ export const openDb = async () => {
     });
   }
 
-  const client = await pool.connect();
+const client = await pool.connect();
   await ensurePromise;
   return wrapClient(client);
 };
