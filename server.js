@@ -1,7 +1,7 @@
 const http = require('http');
 
-const hostname = '127.0.0.1';
-const port = 4000;
+const hostname = '0.0.0.0';
+const port = process.env.PORT || 4000;
 
 const notes = [];
 
