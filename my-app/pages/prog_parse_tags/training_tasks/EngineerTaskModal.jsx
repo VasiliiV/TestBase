@@ -32,7 +32,7 @@ function EngineerTaskModal({ onClose }) {
                     </ul>
                     <h4>Data, observability, and safety</h4>
                     <ul>
-                        <li>Seed isolated data sets per user; prove cross-account isolation by querying <code>sqlite/parsetags.db</code>.</li>
+                        <li>Seed isolated data sets per user; prove cross-account isolation by querying the PostgreSQL <code>task</code> and <code>bags</code> tables.</li>
                         <li>Trace a request: include correlation IDs in UI → API calls and assert they travel to responses and logs.</li>
                         <li>Security hygiene: attempt mass assignment (extra JSON fields) and verify the server ignores them.</li>
                     </ul>
@@ -40,7 +40,7 @@ function EngineerTaskModal({ onClose }) {
                         Suggested checklist for each mission:
                         <pre>
                             <code>- Preconditions and seed data
-- Exact steps and tooling (DevTools, cURL, sqlite3)
+- Exact steps and tooling (DevTools, cURL, psql)
 - Assertions (status, schema, side effects)
 - Evidence: screenshots, queries, and logs
 - Follow-up: how to automate or monitor the scenario</code>

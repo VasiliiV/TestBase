@@ -1,7 +1,19 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
+import { Pool } from 'pg';
 
-const DB_PATH = './sqlite/parsetags.db';
+const connectionString =
+  process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.PGURL;
+
+const ssl =
+  process.env.PGSSLMODE === 'disable'
+    ? false
+    : { rejectUnauthorized: false };
+
+const pool = connectionString
+  ? new Pool({
+      connectionString,
+      ssl: process.env.NODE_ENV === 'production' ? ssl : undefined,
+    })
+  : null;
 
 const TASK_COLUMNS = {
   title: 'TEXT',
@@ -15,7 +27,7 @@ const TASK_COLUMNS = {
   fields: 'TEXT',
   relations: 'TEXT',
   mutes: 'TEXT',
-  created_at: 'TEXT',
+  created_at: 'TIMESTAMPTZ',
   user_name: 'TEXT',
 };
 
@@ -46,112 +58,68 @@ const BAGS_COLUMNS = {
   planned_finish: 'TEXT',
   customer_contacts: 'TEXT',
   sprint: 'TEXT',
-  created_at: 'TEXT',
+  created_at: 'TIMESTAMPTZ',
   user_name: 'TEXT',
 };
 
-const normalizeColumns = (columns) => Object.keys(columns);
-
-const getExistingColumns = async (db, tableName) => {
-  const rows = await db.all(`PRAGMA table_info(${tableName});`);
-  return rows.map((row) => row.name);
+const USER_COLUMNS = {
+  name: 'TEXT',
+  password: 'TEXT',
+  created_at: 'TIMESTAMPTZ DEFAULT NOW()',
 };
 
-const addMissingColumns = async (db, tableName, columns) => {
-  const existing = await getExistingColumns(db, tableName);
+const TAG_COLUMNS = {
+  name: 'TEXT',
+  age: 'INTEGER',
+  created_at: 'TIMESTAMPTZ DEFAULT NOW()',
+};
+
+const wrapClient = (client) => ({
+  query: (text, params = []) => client.query(text, params),
+  all: async (text, params = []) => (await client.query(text, params)).rows,
+  get: async (text, params = []) => (await client.query(text, params)).rows[0],
+  run: async (text, params = []) => {
+    const result = await client.query(text, params);
+    return {
+      rows: result.rows,
+      rowCount: result.rowCount,
+      changes: result.rowCount,
+      lastID: result.rows?.[0]?.id ?? null,
+    };
+  },
+  close: () => client.release(),
+});
+
+const ensureTable = async (client, tableName, columns) => {
+  await client.query(`CREATE TABLE IF NOT EXISTS ${tableName} (id SERIAL PRIMARY KEY)`);
+
   for (const [name, type] of Object.entries(columns)) {
-    if (!existing.includes(name)) {
-      await db.run(`ALTER TABLE ${tableName} ADD COLUMN ${name} ${type};`);
-    }
+    await client.query(`ALTER TABLE ${tableName} ADD COLUMN IF NOT EXISTS ${name} ${type}`);
   }
 };
 
-const LEGACY_TASK_COLUMNS = [
-  'project',
-  'issue_type',
-  'original_estimate',
-  'remaining_estimate',
-  'severity',
-  'priority',
-  'affects_versions',
-  'fix_versions',
-  'build',
-  'assignee',
-];
-
-const isLegacyTaskTable = (columns) =>
-  LEGACY_TASK_COLUMNS.some((column) => columns.includes(column));
-
-const migrateLegacyTaskToBags = async (db) => {
-  await db.run(
-    `INSERT INTO bags (
-      project, issue_type, original_estimate, remaining_estimate, severity, priority,
-      affects_versions, fix_versions, build, assignee, created_at, user_name
-    )
-    SELECT project, issue_type, original_estimate, remaining_estimate, severity, priority,
-      affects_versions, fix_versions, build, assignee, NULL, 'legacy'
-    FROM task;`
-  );
+const ensureUserIndexes = async (client) => {
+  await client.query('CREATE UNIQUE INDEX IF NOT EXISTS user_name_unique ON "user" (name)');
 };
 
-const rebuildTaskTable = async (db) => {
-  await db.run(
-    `CREATE TABLE IF NOT EXISTS task_new (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
-    );`
-  );
-  await addMissingColumns(db, 'task_new', TASK_COLUMNS);
-  await db.run('DROP TABLE task;');
-  await db.run('ALTER TABLE task_new RENAME TO task;');
+const ensureTables = async (db) => {
+  await ensureTable(db, '"user"', USER_COLUMNS);
+  await ensureUserIndexes(db);
+  await ensureTable(db, 'task', TASK_COLUMNS);
+  await ensureTable(db, 'bags', BAGS_COLUMNS);
+  await ensureTable(db, 'tags', TAG_COLUMNS);
 };
 
-const ensureTaskTable = async (db) => {
-  const createTaskExists = await db.get(
-    "SELECT name FROM sqlite_master WHERE type='table' AND name='create_task';"
-  );
-  const taskExists = await db.get(
-    "SELECT name FROM sqlite_master WHERE type='table' AND name='task';"
-  );
-
-  if (createTaskExists && !taskExists) {
-    await db.run('ALTER TABLE create_task RENAME TO task;');
-  }
-
-  await db.run(
-    `CREATE TABLE IF NOT EXISTS task (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
-    );`
-  );
-
-  const columns = await getExistingColumns(db, 'task');
-  if (isLegacyTaskTable(columns)) {
-    await migrateLegacyTaskToBags(db);
-    await rebuildTaskTable(db);
-  } else {
-    await addMissingColumns(db, 'task', TASK_COLUMNS);
+const assertPool = () => {
+  if (!pool) {
+    throw new Error('DATABASE_URL is not configured for PostgreSQL connection');
   }
 };
 
-const ensureBagsTable = async (db) => {
-  await db.run(
-    `CREATE TABLE IF NOT EXISTS bags (
-      id INTEGER PRIMARY KEY AUTOINCREMENT
-    );`
-  );
-
-  await addMissingColumns(db, 'bags', BAGS_COLUMNS);
+export const openDb = async () => {
+  assertPool();
+  const client = await pool.connect();
+  return wrapClient(client);
 };
 
-export const openDb = async () =>
-  open({
-    filename: DB_PATH,
-    driver: sqlite3.Database,
-  });
-
-export const ensureTables = async (db) => {
-  await ensureBagsTable(db);
-  await ensureTaskTable(db);
-};
-
-export const taskColumns = normalizeColumns(TASK_COLUMNS);
-export const bagsColumns = normalizeColumns(BAGS_COLUMNS);
+export { ensureTables };
