@@ -26,7 +26,9 @@ RUN npm ci --omit=dev
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/next.config.js ./next.config.js
+COPY --from=builder /app/lib ./lib
+COPY --from=builder /app/start.js ./start.js
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "node node_modules/next/dist/bin/next start -H 0.0.0.0 -p ${PORT}"]
+CMD ["sh", "-c", "node start.js"]

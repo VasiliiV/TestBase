@@ -1,4 +1,4 @@
-import { Pool } from 'pg';
+const { Pool } = require('pg');
 
 const buildConnectionConfig = () => {
   const directUrl =
@@ -154,7 +154,7 @@ const ensureSchema = async () => {
   }
 };
 
-export const openDb = async () => {
+const openDb = async () => {
   assertPool();
   if (!ensurePromise) {
     ensurePromise = ensureSchema().catch((error) => {
@@ -169,4 +169,4 @@ export const openDb = async () => {
   return wrapClient(client);
 };
 
-export { ensureTables };
+module.exports = { openDb, ensureTables, pool };
