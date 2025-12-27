@@ -29,6 +29,9 @@ export default function click(req, res) {
       }
 
       const lastRow = await db.get('SELECT name, age FROM tags ORDER BY id DESC LIMIT 1');
+      if (!lastRow) {
+        return res.status(200).json({ name: null, age: null });
+      }
       return res.status(200).json(lastRow);
     } catch (err) {
       console.error(err);

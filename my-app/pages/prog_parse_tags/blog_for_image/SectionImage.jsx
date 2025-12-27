@@ -124,7 +124,7 @@ const SectionImage = () => {
     const deleteClick = async () => {
         const response = await fetchWithToken('/api/click', 'DELETE');
         if (response) {
-            // Optional response handling
+            setUserName("");
         }
     };
 
@@ -218,13 +218,15 @@ return (
                             <li className="training-panel__item" key={testCase.id}>
                                 <div className="training-panel__title">{testCase.title}</div>
                                 <div className="training-panel__meta">{testCase.tags || "No tags"} · {formatDate(testCase.createdAt)}</div>
-                                <button
-                                    className="btn btn-ghost"
-                                    type="button"
-                                    onClick={() => handleDeleteTestCase(testCase.id)}
-                                >
-                                    Delete
-                                </button>
+                                <div className="training-panel__actions">
+                                    <button
+                                        className="btn btn-ghost"
+                                        type="button"
+                                        onClick={() => handleDeleteTestCase(testCase.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </li>
                         ))}
                     </ul>
@@ -243,13 +245,15 @@ return (
                             <li className="training-panel__item" key={issue.id}>
                                 <div className="training-panel__title">{issue.summary}</div>
                                 <div className="training-panel__meta">{issue.issueType} · {issue.severity} · {issue.priority}</div>
-                                <button
-                                    className="btn btn-ghost"
-                                    type="button"
-                                    onClick={() => handleDeleteIssue(issue.id)}
-                                >
-                                    Delete
-                                </button>
+                                <div className="training-panel__actions">
+                                    <button
+                                        className="btn btn-ghost"
+                                        type="button"
+                                        onClick={() => handleDeleteIssue(issue.id)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </li>
                         ))}
                     </ul>
