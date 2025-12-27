@@ -56,4 +56,39 @@
 .exam-submit {
     width: 100%;
 }
+
+.exam-results {
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    background: var(--soft);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.exam-results__summary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: var(--muted);
+}
+
+.exam-breakdown {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.exam-breakdown__item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--muted);
+}
   

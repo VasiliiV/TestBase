@@ -1,170 +1,157 @@
 import React, { useState } from 'react';
 
 function Exam() {
-  // Список вопросов экзамена
   const questions = [
     {
       id: 1,
-      question: 'Какой элемент HTML отвечает за создание заголовков?',
-      answers: ['<br>', '<header>', '<h1> - <h6>'],
-      correct: 2,
+      question: 'What is the main goal of consumer contract tests?',
+      answers: [
+        'Catch UI typos before release',
+        'Ensure backend responses stay compatible for clients',
+        'Speed up rendering in the browser',
+      ],
+      correct: 1,
+      topic: 'API contracts',
     },
     {
       id: 2,
-      question: 'Для чего используется Git?',
-      answers: [
-        'Для виртуализации операционных систем',
-        'Для контроля версий исходного кода',
-        'Для автоматизации сборки приложений',
-      ],
-      correct: 1,
+      question: 'Which HTTP methods must remain idempotent in this sandbox?',
+      answers: ['GET and DELETE', 'POST for new resources', 'Any request with a JSON body'],
+      correct: 0,
+      topic: 'API basics',
     },
     {
       id: 3,
-      question: 'Что означает статус-код HTTP 201?',
-      answers: [
-        'Запрос выполнен, но контент отсутствует',
-        'Ресурс успешно создан',
-        'Нужна дополнительная авторизация',
-      ],
-      correct: 1,
+      question: 'When should the server return HTTP 401?',
+      answers: ['When authentication is missing or invalid', 'When payload is malformed', 'When the server crashed'],
+      correct: 0,
+      topic: 'API basics',
     },
     {
       id: 4,
-      question: 'Что такое smoke testing?',
+      question: 'What does HTTP status code 201 mean?',
       answers: [
-        'Полное регрессионное тестирование',
-        'Быстрая проверка ключевых функций',
-        'Тестирование производительности',
+        'Request succeeded but there is no content',
+        'Resource successfully created',
+        'Client should retry later',
       ],
       correct: 1,
+      topic: 'HTTP semantics',
     },
     {
       id: 5,
-      question: 'Что обязательно должно быть в баг-репорте?',
+      question: 'What must a strong bug report include?',
       answers: [
-        'Код исправления',
-        'Шаги, ожидание и фактический результат',
-        'Список всех тест-кейсов',
+        'Only a screenshot of the issue',
+        'Steps, expected vs actual result, and environment details',
+        'Suggested code fix from the tester',
       ],
       correct: 1,
+      topic: 'Process',
     },
     {
       id: 6,
-      question: 'Эквивалентное разбиение помогает:',
+      question: 'What do boundary values check?',
       answers: [
-        'Сгенерировать больше тестов',
-        'Сократить количество тестов, сохранив покрытие',
-        'Автоматизировать тесты без кода',
+        'Random values in the middle of the range',
+        'Minimum and maximum allowed values',
+        'Only negative scenarios',
       ],
       correct: 1,
+      topic: 'Test design',
     },
     {
       id: 7,
-      question: 'Что проверяют граничные значения?',
+      question: 'What is pairwise testing?',
       answers: [
-        'Случайные значения из середины диапазона',
-        'Минимальные и максимальные допустимые значения',
-        'Только отрицательные сценарии',
+        'Testing every combination of parameters',
+        'Testing each pair of parameter values to reduce combinations',
+        'Testing only positive scenarios',
       ],
       correct: 1,
+      topic: 'Test design',
     },
     {
       id: 8,
-      question: 'Что важно проверить при контрактном тестировании API?',
+      question: 'Why propagate correlation IDs across UI → API calls?',
       answers: [
-        'Только скорость ответа',
-        'Формат данных, типы и обязательные поля',
-        'Цвет кнопок в UI',
+        'To randomize payloads for security',
+        'To trace a request across logs and pinpoint failures',
+        'To speed up JSON parsing',
       ],
       correct: 1,
+      topic: 'Observability',
     },
     {
       id: 9,
-      question: 'Какой HTTP-метод считается идемпотентным?',
-      answers: ['GET', 'POST', 'PATCH'],
+      question: 'When do mocks or stubs help the most?',
+      answers: [
+        'When a dependency is slow or unavailable and you need repeatable scenarios',
+        'When UI colors must be tested',
+        'When you want to bypass all validations',
+      ],
       correct: 0,
+      topic: 'Automation',
     },
     {
       id: 10,
-      question: 'Когда нужны миграции базы данных?',
+      question: 'How do you prevent data leakage between users in tests?',
       answers: [
-        'Когда меняется схема или структура таблиц',
-        'Когда добавляют новый UI экран',
-        'Когда меняют цветовую схему',
+        'Share one global token across everyone',
+        'Use dedicated users/fixtures and clean up created data per scenario',
+        'Disable authentication checks',
       ],
-      correct: 0,
+      correct: 1,
+      topic: 'Data isolation',
     },
     {
       id: 11,
-      question: 'Что такое регрессионный баг?',
+      question: 'What is a regression bug?',
       answers: [
-        'Ошибка, обнаруженная до релиза',
-        'Повторно возникшая ошибка после изменений',
-        'Опечатка в тексте интерфейса',
+        'A defect found only in staging',
+        'A reappearing defect after changes or deployments',
+        'A typo in interface text',
       ],
       correct: 1,
+      topic: 'Process',
     },
     {
       id: 12,
-      question: 'Какой код статуса отвечает за отсутствие авторизации?',
-      answers: ['200', '401', '500'],
+      question: 'What should a QA-focused CI gate include?',
+      answers: [
+        'Only manual exploratory sessions',
+        'Smoke tests for API + UI + DB migrations that fail fast on errors',
+        'Deploy without any validation to save time',
+      ],
       correct: 1,
+      topic: 'CI/CD',
     },
     {
       id: 13,
-      question: 'Что такое тест-кейс?',
+      question: 'Why validate error response formats in API tests?',
       answers: [
-        'Описание шагов и ожидаемого результата',
-        'Список багов в релизе',
-        'График нагрузки системы',
+        'To let clients handle failures consistently and build robust parsing',
+        'To reduce CSS size',
+        'To speed up animations',
       ],
       correct: 0,
+      topic: 'API contracts',
     },
     {
       id: 14,
-      question: 'Что важно проверить в API пагинации?',
+      question: 'What matters when testing API pagination?',
       answers: [
-        'Только наличие кнопки “Далее”',
-        'Поля page/limit/total и корректность следующей страницы',
-        'Цвет индикатора загрузки',
+        'Only the presence of a “Next” button',
+        'page/limit/total fields, deterministic ordering, and correct next page',
+        'Loading indicator color',
       ],
       correct: 1,
-    },
-    {
-      id: 15,
-      question: 'Что означает статус-код HTTP 400?',
-      answers: [
-        'Серверная ошибка',
-        'Неверный запрос клиента',
-        'Ресурс создан',
-      ],
-      correct: 1,
-    },
-    {
-      id: 16,
-      question: 'Что такое pairwise тестирование?',
-      answers: [
-        'Проверка всех комбинаций параметров',
-        'Проверка каждой пары значений параметров',
-        'Проверка только позитивных сценариев',
-      ],
-      correct: 1,
-    },
-    {
-      id: 17,
-      question: 'Зачем проверять формат ошибок в API?',
-      answers: [
-        'Чтобы ускорить UI-анимации',
-        'Чтобы клиенты могли стабильно обрабатывать ошибки',
-        'Чтобы уменьшить размер CSS',
-      ],
-      correct: 1,
+      topic: 'API basics',
     },
   ];
 
-  // Состояние для отслеживания текущего выбора пользователя
   const [userAnswers, setUserAnswers] = useState({});
+  const [result, setResult] = useState(null);
 
   const handleAnswerChange = (e, questionId) => {
     const { value } = e.target;
@@ -174,24 +161,43 @@ function Exam() {
   const handleSubmit = (e) => {
     e.preventDefault();
     let score = 0;
+    const topicTotals = {};
+    const topicScores = {};
 
     questions.forEach((q) => {
+      topicTotals[q.topic] = (topicTotals[q.topic] || 0) + 1;
       if (userAnswers[q.id] === q.correct) {
         score += 1;
+        topicScores[q.topic] = (topicScores[q.topic] || 0) + 1;
       }
     });
 
-    alert(`Вы набрали ${score} из ${questions.length} правильных ответов.`);
-    // Здесь можно также отправить результаты на сервер или обработать иначе, в зависимости от ваших требований.
+    const topicBreakdown = Object.keys(topicTotals).map((topic) => ({
+      topic,
+      correct: topicScores[topic] || 0,
+      total: topicTotals[topic],
+    }));
+
+    const gaps = topicBreakdown.filter((item) => item.correct < item.total);
+
+    setResult({
+      score,
+      total: questions.length,
+      topicBreakdown,
+      summary:
+        gaps.length === 0
+          ? 'Outstanding — you are ready to automate and mentor.'
+          : `Focus next on: ${gaps.map((item) => item.topic).join(', ')}`,
+    });
   };
 
   return (
     <div className="exam-shell">
       <div className="exam-card">
         <div className="exam-header">
-          <span className="pill">Экзамен</span>
-          <h1>Экзамен по тестированию</h1>
-          <p>Проверь знания по базовым темам: HTML, Git и тест-дизайн.</p>
+          <span className="pill">Exam</span>
+          <h1>Testing engineering exam</h1>
+          <p>Validate your readiness across API quality, observability, automation, and process rigor.</p>
         </div>
         <form onSubmit={handleSubmit} className="exam-form">
           {questions.map((q) => (
@@ -213,8 +219,25 @@ function Exam() {
               </div>
             </div>
           ))}
-          <button className="btn btn-primary exam-submit" type="submit">Отправить</button>
+          <button className="btn btn-primary exam-submit" type="submit">Submit</button>
         </form>
+        {result && (
+          <div className="exam-results" aria-live="polite">
+            <div className="exam-results__summary">
+              <h3>Results</h3>
+              <p>You scored {result.score} out of {result.total}.</p>
+              <p>{result.summary}</p>
+            </div>
+            <div className="exam-breakdown">
+              {result.topicBreakdown.map((item) => (
+                <div key={item.topic} className="exam-breakdown__item">
+                  <span>{item.topic}</span>
+                  <strong>{item.correct}/{item.total}</strong>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -20,15 +20,15 @@ describe('AuthUser', () => {
 
   test('renders AuthUser component', () => {
     render(<AuthUser />);
-    expect(screen.getByLabelText(/Имя пользователя/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/Пароль/i)).toBeInTheDocument();
-    expect(screen.getByText(/Если пользователя нет, он будет создан автоматически/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Username/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/Password/i)).toBeInTheDocument();
+    expect(screen.getByText(/they will be created automatically on first sign-in/i)).toBeInTheDocument();
   });
 
   test('displays error message when fields are empty on login', () => {
     render(<AuthUser />);
-    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
-    expect(screen.getByText(/Имя пользователя и пароль обязательны./i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText(/Sign in or create an account/i));
+    expect(screen.getByText(/Username and password are required./i)).toBeInTheDocument();
   });
 
   test('successful login redirects to /auth', async () => {
@@ -39,10 +39,10 @@ describe('AuthUser', () => {
     );
 
     render(<AuthUser />);
-    fireEvent.change(screen.getByLabelText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByLabelText(/Пароль/i), { target: { value: 'testpassword' } });
+    fireEvent.change(screen.getByLabelText(/Username/i), { target: { value: 'testuser' } });
+    fireEvent.change(screen.getByLabelText(/Password/i), { target: { value: 'testpassword' } });
 
-    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
+    fireEvent.click(screen.getByText(/Sign in or create an account/i));
 
     await waitFor(() => {
       expect(localStorage.getItem('token')).toBe('fake-token');
@@ -58,10 +58,10 @@ describe('AuthUser', () => {
     );
 
     render(<AuthUser />);
-    fireEvent.change(screen.getByLabelText(/Имя пользователя/i), { target: { value: 'testuser' } });
-    fireEvent.change(screen.getByLabelText(/Пароль/i), { target: { value: 'testpassword' } });
+    fireEvent.change(screen.getByLabelText(/Username/i), { target: { value: 'testuser' } });
+    fireEvent.change(screen.getByLabelText(/Password/i), { target: { value: 'testpassword' } });
 
-    fireEvent.click(screen.getByText(/Войти или создать аккаунт/i));
+    fireEvent.click(screen.getByText(/Sign in or create an account/i));
 
     await screen.findByText(/Invalid credentials/i);
 

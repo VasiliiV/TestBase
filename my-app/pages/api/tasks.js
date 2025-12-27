@@ -16,7 +16,7 @@ export default async function tasks(req, res) {
 
       const userName = req.user?.name;
       if (!userName) {
-        return res.status(401).json({ message: 'Пользователь не найден' });
+        return res.status(401).json({ message: 'User not found' });
       }
 
       if (req.method === 'GET') {
@@ -69,10 +69,10 @@ export default async function tasks(req, res) {
         );
 
         return res.status(201).json({
-          message: 'Тест-кейс успешно создан',
+          message: 'Test case created',
           data: {
             id: result.lastID,
-            title: title || 'Без названия',
+            title: title || 'Untitled',
             description: description || null,
             tags: tags || null,
             created_at: createdAt,
@@ -82,17 +82,17 @@ export default async function tasks(req, res) {
 
       const id = req.body?.id ?? req.query?.id;
       if (!id) {
-        return res.status(400).json({ message: 'Не указан идентификатор' });
+        return res.status(400).json({ message: 'Identifier is required' });
       }
 
       const result = await db.run(
         'DELETE FROM task WHERE id = ? AND user_name = ?',
         [id, userName]
       );
-      return res.status(200).json({ message: 'Запись удалена', changes: result.changes });
+      return res.status(200).json({ message: 'Record deleted', changes: result.changes });
     } catch (error) {
       console.error(error);
-      return res.status(500).json({ message: 'Ошибка сервера' });
+      return res.status(500).json({ message: 'Server error' });
     } finally {
       if (db) {
         await db.close();
