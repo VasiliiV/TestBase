@@ -1,6 +1,5 @@
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import authenticate from './authenticate.js';
+import { ensureTables, openDb } from '../../lib/db';
 
 export default function click(req, res) {
   const allowedMethods = ['GET', 'POST', 'DELETE'];
@@ -12,14 +11,12 @@ export default function click(req, res) {
   return authenticate(req, res, async () => {
     let db;
     try {
-      db = await open({
-        filename: './sqlite/parsetags.db',
-        driver: sqlite3.Database,
-      });
+      db = await openDb();
+      await ensureTables(db);
 
       if (req.method === 'POST') {
         const { name, age } = req.body;
-        await db.run('INSERT INTO tags (name, age) VALUES (?, ?)', [name, age]);
+        await db.run('INSERT INTO tags (name, age) VALUES ($1, $2)', [name, age]);
         return res.status(200).json({ name, age });
       }
 

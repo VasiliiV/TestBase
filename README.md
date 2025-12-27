@@ -25,20 +25,22 @@
 ```bash
 cd my-app
 npm install
+export DATABASE_URL="postgresql://<user>:<password>@<host>:<port>/<db>?sslmode=disable" # например, из Railway или локального postgres
 npm run dev -- --hostname 0.0.0.0 --port 3000
 ```
-Приложение будет доступно на http://localhost:3000. API использует SQLite-базу в `my-app/sqlite/parsetags.db`.
+Приложение будет доступно на http://localhost:3000. API использует PostgreSQL (переменная `DATABASE_URL`). Если эту переменную не задать, можно передать раздельные креды (`PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`), иначе приложение не сможет подключиться к БД.
 
 ### 3. Запуск через Docker Compose
-Для быстрого старта добавлены dev-секреты в `docker-compose.yml`.
+Для быстрого старта добавлены dev-секреты и локальный PostgreSQL в `docker-compose.yml`.
 ```bash
 docker compose up --build
 ```
-- `nextjs` поднимет фронт+API на `http://localhost:3000`
+- `postgres` поднимет локальную БД с пользователем/паролем/БД `testbase`
+- `nextjs` поднимет фронт+API на `http://localhost:3000` и автоматически подключится к `postgres` через `DATABASE_URL`
 - `mock` запустит вспомогательный сервер на `http://localhost:4000`
 - `autotests` соберёт и запустит тесты из `testBaseAutoTest` (однократно)
 
-При необходимости подставьте свои секреты через переменные окружения или `env_file`.
+При необходимости подставьте свои секреты или изменить креды БД через переменные окружения или `env_file`.
 
 ### 4. Jenkins локально
 1. Запустите Jenkins в Docker:
@@ -78,7 +80,7 @@ docker compose up --build
 - Java API: `testBaseAutoTest/src`
 
 ## Обновления (срез текущей работы)
-- Сохранение тест-кейсов и баг-репортов в SQLite с привязкой к пользователю, чтение и удаление из UI.
+- Переезд API на PostgreSQL с автоматическим созданием таблиц и индексом уникальности пользователей.
 - Миграция таблиц: `create_task` → `task`, добавлена `bags`, перенос legacy-данных.
 - Новые API ручки `/api/tasks` и `/api/bags` (GET/POST/DELETE), защита через JWT.
 - Добавлены Playwright API-тесты, покрывающие все текущие эндпоинты приложения.

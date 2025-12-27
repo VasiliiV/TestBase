@@ -1,14 +1,30 @@
 version: '3.9'
 
 services:
+  postgres:
+    container_name: postgres-db
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: testbase
+      POSTGRES_USER: testbase
+      POSTGRES_PASSWORD: testbase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
   nextjs:
     container_name: nextjs-app
     build:
       context: ./my-app
       dockerfile: Dockerfile
     environment:
+      DATABASE_URL: postgresql://testbase:testbase@postgres:5432/testbase
       ACCESS_TOKEN_SECRET: dev-access-token
       REFRESH_TOKEN_SECRET: dev-refresh-token
+    depends_on:
+      - postgres
     ports:
       - "3000:3000"
     restart: always
@@ -32,3 +48,6 @@ services:
       - mock
     command: ["npm", "run", "test"]
     restart: "no"
+
+volumes:
+  pgdata:
