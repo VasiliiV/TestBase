@@ -55,7 +55,7 @@ public class AuthUserPage implements AuthActions {
 
     @Step("Удаление всех записей из таблицы user")
     public static void deleteAllUsers() {
-        String sql = "DELETE FROM user";
+        String sql = "DELETE FROM \"user\"";
 
         try (Connection conn = connect();
              PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
