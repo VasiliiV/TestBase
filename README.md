@@ -28,7 +28,7 @@ npm install
 export DATABASE_URL="postgresql://<user>:<password>@<host>:<port>/<db>?sslmode=disable" # например, из Railway или локального postgres
 npm run dev -- --hostname 0.0.0.0 --port 3000
 ```
-Приложение будет доступно на http://localhost:3000. API использует PostgreSQL (переменная `DATABASE_URL`). Если переменную не задать, приложение не сможет подключиться к БД.
+Приложение будет доступно на http://localhost:3000. API использует PostgreSQL (переменная `DATABASE_URL`). Если эту переменную не задать, можно передать раздельные креды (`PGHOST`, `PGPORT`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`), иначе приложение не сможет подключиться к БД.
 
 ### 3. Запуск через Docker Compose
 Для быстрого старта добавлены dev-секреты и локальный PostgreSQL в `docker-compose.yml`.

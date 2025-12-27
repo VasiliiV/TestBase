@@ -1,16 +1,41 @@
 import { Pool } from 'pg';
 
-const connectionString =
-  process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.PGURL;
+const buildConnectionConfig = () => {
+  const directUrl =
+    process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.PGURL;
+
+  if (directUrl) {
+    return { connectionString: directUrl };
+  }
+
+  const pg = {
+    host: process.env.PGHOST || process.env.POSTGRES_HOST,
+    port: process.env.PGPORT || process.env.POSTGRES_PORT || '5432',
+    user: process.env.PGUSER || process.env.POSTGRES_USER,
+    password: process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD,
+    database: process.env.PGDATABASE || process.env.POSTGRES_DB,
+  };
+
+  if (pg.host && pg.user && pg.password && pg.database) {
+    const encodedPassword = encodeURIComponent(pg.password);
+    return {
+      connectionString: `postgresql://${pg.user}:${encodedPassword}@${pg.host}:${pg.port}/${pg.database}`,
+    };
+  }
+
+  return null;
+};
+
+const baseConfig = buildConnectionConfig();
 
 const ssl =
   process.env.PGSSLMODE === 'disable'
     ? false
     : { rejectUnauthorized: false };
 
-const pool = connectionString
+const pool = baseConfig
   ? new Pool({
-      connectionString,
+      ...baseConfig,
       ssl: process.env.NODE_ENV === 'production' ? ssl : undefined,
     })
   : null;
@@ -112,7 +137,9 @@ const ensureTables = async (db) => {
 
 const assertPool = () => {
   if (!pool) {
-    throw new Error('DATABASE_URL is not configured for PostgreSQL connection');
+    throw new Error(
+      'Database connection is not configured. Set DATABASE_URL or PGHOST/PGUSER/PGPASSWORD/PGDATABASE environment variables.'
+    );
   }
 };
 
@@ -137,7 +164,7 @@ export const openDb = async () => {
     });
   }
 
-const client = await pool.connect();
+  const client = await pool.connect();
   await ensurePromise;
   return wrapClient(client);
 };
